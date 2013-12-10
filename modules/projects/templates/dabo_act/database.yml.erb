@@ -1,0 +1,15 @@
+development: &default
+  adapter: postgresql
+  database: dabo_act_development
+  pool: 5
+  timeout: 5000
+  port: <%%= ENV["BOXEN_POSTGRESQL_PORT"] || 5432 %>
+  host: localhost
+
+
+test:
+  <<: *default
+  database: dabo_act_test
+  min_messages: warning
+  port: <%%= ENV["BOXEN_POSTGRESQL_PORT"] || 5432 %>
+  host: localhost
