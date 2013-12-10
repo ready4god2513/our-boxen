@@ -115,8 +115,6 @@ This template project provides the following by default:
 * dnsmasq w/ .dev resolver for localhost
 * rbenv
 * Full Disk Encryption requirement
-* Node.js 0.6
-* Node.js 0.8
 * Node.js 0.10
 * Ruby 1.8.7
 * Ruby 1.9.2
@@ -125,6 +123,7 @@ This template project provides the following by default:
 * ack
 * Findutils
 * GNU tar
+* dabo_act and all its dependecies (Postgresql, Redis, Phantomjs)
 
 ## Customizing
 
