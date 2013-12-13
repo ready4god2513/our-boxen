@@ -2,6 +2,8 @@ require boxen::environment
 require homebrew
 require gcc
 
+notify { "Hi ${::boxen_user}!": }
+
 Exec {
   group       => 'staff',
   logoutput   => on_failure,
