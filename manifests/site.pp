@@ -106,6 +106,7 @@ node default {
 
   # Common Apps
   include chrome
+  include backblaze
 
   # Dabo projects
   include projects::dabo_act

@@ -234,6 +234,11 @@ GITHUBTARBALL
     zsh (1.0.0)
 
 GITHUBTARBALL
+  remote: dabohealth/puppet-backblaze
+  specs:
+    backblaze (0.0.1)
+
+GITHUBTARBALL
   remote: puppetlabs/puppetlabs-inifile
   specs:
     inifile (1.0.0)
@@ -250,6 +255,7 @@ GITHUBTARBALL
 
 DEPENDENCIES
   alfred (= 1.1.7)
+  backblaze (= 0.0.1)
   boxen (= 3.3.5)
   chrome (= 1.1.2)
   cmake (= 1.0.1)
