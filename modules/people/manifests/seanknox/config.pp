@@ -2,46 +2,28 @@ class people::seanknox::config {
 
   osx::recovery_message { 'If this Mac is found, please call and collect your reward: 415-401-5633': }
 
-  # Common OSX default configurations
-  boxen::osx_defaults { 'Change software update check frequency to daily':
-    key    => 'ScheduleFrequency',
-    domain => 'com.apple.SoftwareUpdate',
-    value  => '1',
-    user   => $::boxen_user
-  }
+  ## Common OSX default configurations
+  include osx::global::expand_print_dialog ## expand the print dialog by default
+  include osx::global::expand_save_dialog ## expand the save dialog by default
+  include osx::global::enable_keyboard_control_access ## enables the keyboard for navigating controls in dialogs
+  include osx::global::disable_key_press_and_hold
+  include osx::global::enable_keyboard_control_access ## Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 
-  # Time Machine
-  boxen::osx_defaults { 'Prevent Time Machine from prompting to use new hard drives as backup volume':
-    key    => 'DoNotOfferNewDisksForBackup',
-    domain => 'com.apple.TimeMachine',
-    value  => 'true',
-    user   => $::boxen_user
-  }
+  ## Finder
+  include osx::finder::show_all_on_desktop
+  include osx::finder::show_hidden_files
+  include osx::finder::unhide_library
 
-  # Finder
   boxen::osx_defaults { 'Use Column view in all Finder windows by default':
     key    => 'FXPreferredViewStyle',
     domain => 'com.apple.Finder',
     value  => 'clmv',
     user   => $::boxen_user
   }
+
   boxen::osx_defaults { 'Show Path bar in Finder':
     key    => 'ShowPathbar',
     domain => 'com.apple.Finder',
-    value  => 'true',
-    user   => $::boxen_user
-  }
-
-  boxen::osx_defaults { 'Autohide the Dock':
-    key    => 'autohide',
-    domain => 'com.apple.dock',
-    value  => 'yes',
-    user   => $::boxen_user
-  }
-
-  boxen::osx_defaults { 'Enable magnification':
-    key    => 'magnification',
-    domain => 'com.apple.dock',
     value  => 'true',
     user   => $::boxen_user
   }
@@ -51,18 +33,31 @@ class people::seanknox::config {
       delay => 0
   }
   class { 'osx::global::key_repeat_rate':
-    rate => 12
+    rate => 2
   }
 
-  include osx::global::disable_key_press_and_hold
+ ## Misc
+  include osx::no_network_dsstores ## disable creation of .DS_Store files on network shares
+  include osx::disable_app_quarantine ## disable the downloaded app quarantine
 
-  boxen::osx_defaults { 'Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)':
-    key    => 'AppleKeyboardUIMode',
-    domain => 'NSGlobalDomain',
-    value  => '3',
+  boxen::osx_defaults { 'Change software update check frequency to daily':
+    key    => 'ScheduleFrequency',
+    domain => 'com.apple.SoftwareUpdate',
+    value  => '1',
     user   => $::boxen_user
   }
-
+  boxen::osx_defaults { 'Prevent Time Machine from prompting to use new hard drives as backup volume':
+    key    => 'DoNotOfferNewDisksForBackup',
+    domain => 'com.apple.TimeMachine',
+    value  => 'true',
+    user   => $::boxen_user
+  }
+  boxen::osx_defaults { 'Enable magnification':
+    key    => 'magnification',
+    domain => 'com.apple.dock',
+    value  => 'true',
+    user   => $::boxen_user
+  }
   boxen::osx_defaults { 'Automatically illuminate built-in MacBook keyboard in low light':
     key    => 'kDim',
     domain => 'com.apple.BezelServices',
@@ -83,15 +78,6 @@ class people::seanknox::config {
     value  => '40',
     user   => $::boxen_user
   }
-
-  boxen::osx_defaults { 'Disable the "Are you sure you want to open this application?" dialog':
-    key    => 'LSQuarantine',
-    domain => 'com.apple.LaunchServices',
-    value  => 'false',
-    user   => $::boxen_user
-  }
-
-
 
 }
 
