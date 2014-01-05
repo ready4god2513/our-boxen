@@ -76,7 +76,7 @@ node default {
   include ruby::1_9_3
   include ruby::2_0_0
 
-  $global_ruby_version = "1.9.3"
+  $global_ruby_version = "2.0.0"
   $global_nodejs_version = "v0.10.5"
 
   # set global ruby version in rbenv
