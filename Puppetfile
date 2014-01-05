@@ -48,10 +48,11 @@ github "openssl",    "1.0.0"
 github "phantomjs",  "2.1.0"
 github "pkgconfig",  "1.0.0"
 github "repository", "2.2.0"
-github "ruby",       "6.8.0"
+github "ruby",       "7.1.3"
 github "stdlib",     "4.1.0", :repo => "puppetlabs/puppetlabs-stdlib"
 github "sudo",       "1.0.0"
 github "xquartz",    "1.1.1"
+github "module-data", "0.0.1", :repo => "ripienaar/puppet-module-data"
 
 # System (additional)
 github "osx",               "2.2.1"

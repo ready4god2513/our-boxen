@@ -75,9 +75,6 @@ class people::seanknox::applications {
 
   mysql::db { 'mydb': }
 
-  include ruby::1_9_3
-  include ruby::2_0_0
-
   ## Ruby 1.9.3
   ruby::gem { "pry for 1.9.3":
     gem     => 'pry',
