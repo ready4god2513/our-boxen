@@ -1,4 +1,49 @@
-# Our Boxen
+# Dabo's Boxen
+
+This is Dabo's incarnation of [GitHub's Boxen](https://boxen.github.com). Automated Mac provisioning.
+
+## Getting Started with Boxen at Dabo:
+*tested on clean OS X 10.8 machine*
+
+### Prerequisites
+1. You have a GitHub account, and have been added to the `dabohealth` organization.
+2. You have installed Xcode from the Mac App Store as well as Command Line Tools.
+
+
+### Steps
+*This guide assumes you are running Boxen on a __clean install__ of OS X 10.8 (Mountain Lion) or 10.9 (Mavericks).*
+
+1. Install Xcode from the Mac App Store. If on OS X 10.8, also install Command Line Tools.
+2. Install Boxen by either:
+	*  Using [Dabo Boxen Web](https://dabo-boxen-web.herokuapp.com), or
+	* Open Terminal.app and do the following:
+
+```bash
+sudo mkdir -p /opt/boxen
+sudo chown ${USER}:staff /opt/boxen
+git clone https://github.com/dabohealth/our-boxen.git /opt/boxen/repo
+cd /opt/boxen/repo
+script/boxen --debug --profile
+```
+
+Boxen will run for awhile, depending on the speed of your computer. After it finishes, your provisioning is now complete. Apps (Chrome, Dropbox, etc.), Rubies (1.8.7, 1.9.3, and 2.0.0 [default]), and Homebrew packages (postgresql, redis, etc.) have been automatically installed. Further custom tweaks can be added and scripted automatically by editing your personal .pp manifest file at `modules/people/manifests/$YOUR_GITHUB_HANDLE.pp`. See @seanknox for help setting up a custom manifest, or take a look at `modules/people/manifests/seanknox`.
+
+## Initial Setup for the dabo_act Project
+
+As part of the Boxen run, the [dabo_act](https://github.com/dabohealth/dabo_act) project will automatically be cloned and (almost) setup. Boxen will attempt to:
+
+* Clone the repo
+* Ensure Redis, Postgresql, PhantomJS are all installed and running
+* Install project version of Ruby and automatically run `bundle install`
+* Prepare default config/database.yml
+
+You will still need to prepare the database (`rake db:migrate`, etc.). See the [dabo_act](https://github.com/dabohealth/dabo_act) project page for more details.
+
+At this point you should be done—you can stop reading and start shipping. For more information about the Boxen project (as well as what Boxen provides), read on for a guide from GitHub Inc.
+
+
+# Our Boxen (instructions from GitHub Inc...)
+
 
 This is a template Boxen project designed for your organization to fork and
 modify appropriately.
@@ -127,6 +172,8 @@ This template project provides the following by default:
 * dnsmasq w/ .dev resolver for localhost
 * rbenv
 * Full Disk Encryption requirement
+* Node.js 0.6
+* Node.js 0.8
 * Node.js 0.10
 * Ruby 1.8.7
 * Ruby 1.9.2
@@ -135,7 +182,6 @@ This template project provides the following by default:
 * ack
 * Findutils
 * GNU tar
-* dabo_act and all its dependecies (Postgresql, Redis, Phantomjs)
 
 ## Customizing
 
