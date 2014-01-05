@@ -2,8 +2,6 @@ require boxen::environment
 require homebrew
 require gcc
 
-notify { "Hi ${::boxen_user}!": }
-
 Exec {
   group       => 'staff',
   logoutput   => on_failure,
@@ -95,7 +93,8 @@ node default {
     [
       'ack',
       'findutils',
-      'gnu-tar'
+      'gnu-tar',
+      'the_silver_searcher'
     ]:
   }
 
@@ -107,6 +106,10 @@ node default {
   # COMMON APPS
   include chrome
   include backblaze
+  include dropbox
+  include iterm2::stable
+  include virtualbox
+  include tmux
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
@@ -120,7 +123,6 @@ node default {
 
   ## Finder
   include osx::finder::show_all_on_desktop
-  include osx::finder::show_hidden_files
   include osx::finder::unhide_library
 
   boxen::osx_defaults { 'Use Column view in all Finder windows by default':
@@ -180,12 +182,11 @@ node default {
     user   => $::boxen_user
   }
 
-  # Bluetooth
-  boxen::osx_defaults { 'Improve the quality of Bluetooth Audio':
-    key    => '"Apple Bitpool Min (editable)"',
-    domain => 'com.apple.BluetoothAudioAgent',
-    value  => '40',
-    user   => $::boxen_user
+  osx_login_item {
+    'Dropbox':
+      name    => 'Dropbox',
+      path    => '/Applications/Dropbox.app',
+      hidden  => true;
   }
 
   # PROJECTS
