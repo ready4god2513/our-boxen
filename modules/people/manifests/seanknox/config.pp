@@ -79,5 +79,17 @@ class people::seanknox::config {
     user   => $::boxen_user
   }
 
+  osx_login_item {
+    'Alfred 2':
+      name    => 'Alfred 2',
+      path    => '/Applications/Alfred 2.app',
+      hidden  => true;
+
+    'Dropbox':
+      name    => 'Dropbox',
+      path    => '/Applications/Dropbox.app',
+      hidden  => true;
+  }
+
 }
 

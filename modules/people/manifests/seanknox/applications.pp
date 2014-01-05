@@ -15,7 +15,6 @@ class people::seanknox::applications {
   include zsh
   include onepassword
   include ctags
-  include silver_searcher
   include skitch
   include openssl
   include cmake

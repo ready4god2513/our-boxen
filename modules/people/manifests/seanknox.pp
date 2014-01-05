@@ -1,6 +1,5 @@
 class people::seanknox {
 
-  notify { 'Hi ${::boxen_user}!': }
 
   include people::seanknox::dotfiles
   include people::seanknox::applications
