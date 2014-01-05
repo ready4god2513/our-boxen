@@ -27,7 +27,10 @@ class projects::dabo_act {
   exec { "env -i bash -c 'source /opt/boxen/env.sh && RBENV_VERSION=${dabo_ruby_version} bundle install'":
     provider => 'shell',
     cwd => "${boxen::config::srcdir}/dabo_act",
-    require => [ Ruby::Gem["bundler for ${dabo_ruby_version}"] ]
+    require => [
+      Ruby::Gem["bundler for ${dabo_ruby_version}"],
+      Service['postgresql']
+    ]
   }
 
 }
