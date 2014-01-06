@@ -71,6 +71,10 @@ node default {
   $global_ruby_version = "2.0.0"
   $global_nodejs_version = "v0.10.5"
 
+  ensure_resource('ruby::version', '1.9.3')
+  ensure_resource('ruby::version', '2.0.0')
+  ensure_resource('ruby::version', '2.1.0')
+
   # set global ruby version in rbenv
   class { 'ruby::global':
     version => $global_ruby_version
