@@ -9,7 +9,7 @@ development: &default
 
 test:
   <<: *default
-  database: dabo_act_test
+  database: dabo_act_test<%%= ENV['TEST_ENV_NUMBER'] %>
   min_messages: warning
   port: <%%= ENV["BOXEN_POSTGRESQL_PORT"] || 5432 %>
   host: localhost
