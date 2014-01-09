@@ -187,6 +187,4 @@ node default {
       hidden  => true;
   }
 
-  # PROJECTS
-  include projects::dabo_act
 }
