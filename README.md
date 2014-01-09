@@ -30,7 +30,11 @@ Boxen will run for awhile, depending on the speed of your computer. After it fin
 
 ## Initial Setup for the dabo_act Project
 
-As part of the Boxen run, the [dabo_act](https://github.com/dabohealth/dabo_act) project will automatically be cloned and (almost) setup. Boxen will attempt to:
+After the initial Boxen run, you can use Boxen to clone and (almost totally) setup [dabo_act](https://github.com/dabohealth/dabo_act). Setup the project by:
+
+`$ boxen dabo_act`
+
+Boxen will:
 
 * Clone the repo
 * Ensure Redis, Postgresql, PhantomJS are all installed and running
