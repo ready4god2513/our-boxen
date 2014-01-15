@@ -21,16 +21,23 @@ class projects::dabo_act {
       require => Repository["${boxen::config::srcdir}/dabo_act"]
   }
 
-  # Run bundle install.
-  # rbenv-installed gems cannot be run in the boxen installation environment which uses the system
-  # ruby. The environment must be cleared (env -i) so an installed ruby (and gems) can be used in a new shell.
-  exec { "env -i bash -c 'source /opt/boxen/env.sh && RBENV_VERSION=${dabo_ruby_version} bundle install'":
+  ## rbenv-installed gems cannot be run in the boxen installation environment
+  ## which uses the system ruby. The environment must be cleared (env -i)
+  ## so an installed ruby (and gems) can be used in a new shell.
+
+  $bundle = "env -i bash -c 'source /opt/boxen/env.sh && RBENV_VERSION=${dabo_ruby_version} bundle"
+
+  ## NOTE: don't forget the trailing single quote in the command!
+  ## bundle install
+  exec { "bundle install dabo_act":
     provider => 'shell',
+    command => "${bundle} install'",
     cwd => "${boxen::config::srcdir}/dabo_act",
     require => [
       Ruby::Gem["bundler for ${dabo_ruby_version}"],
       Service['postgresql']
-    ]
+    ],
+    timeout => 1800
   }
 
 }
