@@ -1,5 +1,6 @@
 class projects::dabo_act {
   include phantomjs::1_9_0
+  include heroku
 
   $dabo_ruby_version = "2.0.0-p353"
 
@@ -52,6 +53,28 @@ class projects::dabo_act {
     ]
   }
 
+  ## rake db:seed
+  exec { "rake db:seed dabo_act":
+    provider => 'shell',
+    command => "${bundle} exec rake db:seed'",
+    cwd => "${boxen::config::srcdir}/dabo_act",
+    require => [
+      Exec["bundle install dabo_act"],
+      Postgresql::Db['dabo_act_development']
+    ]
+  }
+
+  ## rake db:sample_data
+  exec { "rake db:sample_data dabo_act":
+    provider => 'shell',
+    command => "${bundle} exec rake db:sample_data'",
+    cwd => "${boxen::config::srcdir}/dabo_act",
+    require => [
+      Exec["bundle db:seed dabo_act"],
+      Postgresql::Db['dabo_act_development']
+    ]
+  }
+
   ## rake db:test:prepare
   exec { "rake db:test:prepare dabo_act":
     provider => 'shell',
@@ -60,7 +83,8 @@ class projects::dabo_act {
     require => [
       Exec["bundle install dabo_act"],
       Exec["rake db:migrate dabo_act"],
-      Postgresql::Db['dabo_act_development']
+      Postgresql::Db['dabo_act_development'],
+      Postgresql::Db['dabo_act_test']
     ]
   }
 
