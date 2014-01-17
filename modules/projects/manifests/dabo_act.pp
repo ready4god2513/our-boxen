@@ -26,7 +26,7 @@ class projects::dabo_act {
   ## which uses the system ruby. The environment must be cleared (env -i)
   ## so an installed ruby (and gems) can be used in a new shell.
 
-  $bundle = "env -i zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${dabo_ruby_version} bundle"
+  $bundle = "env -i zsh -c 'source /opt/boxen/env.sh && REDISTOGO_URL=redis://localhost:16379 RBENV_VERSION=${dabo_ruby_version} bundle"
 
   ## NOTE: don't forget the trailing single quote in the command!
   ## bundle install
@@ -70,7 +70,7 @@ class projects::dabo_act {
     command => "${bundle} exec rake db:sample_data'",
     cwd => "${boxen::config::srcdir}/dabo_act",
     require => [
-      Exec["bundle db:seed dabo_act"],
+      Exec["rake db:seed dabo_act"],
       Postgresql::Db['dabo_act_development']
     ]
   }
