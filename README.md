@@ -30,7 +30,7 @@ Boxen will run for awhile, depending on the speed of your computer. After it fin
 
 ## Initial Setup for the dabo_act Project
 
-After the initial Boxen run, you can use Boxen to clone and (almost totally) setup [dabo_act](https://github.com/dabohealth/dabo_act). Setup the project by:
+After the initial Boxen run, you can use Boxen to clone and automagically setup [dabo_act](https://github.com/dabohealth/dabo_act). Setup the project by:
 
 `$ boxen dabo_act`
 
@@ -40,8 +40,7 @@ Boxen will:
 * Ensure Redis, Postgresql, PhantomJS are all installed and running
 * Install project version of Ruby and automatically run `bundle install`
 * Prepare default config/database.yml
-
-You will still need to prepare the database (`rake db:migrate`, etc.). See the [dabo_act](https://github.com/dabohealth/dabo_act) project page for more details.
+* Load seed data and sample data
 
 At this point you should be done—you can stop reading and start shipping. For more information about the Boxen project (as well as what Boxen provides), read on for a guide from GitHub Inc.
 
