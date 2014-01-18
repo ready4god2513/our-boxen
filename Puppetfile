@@ -29,7 +29,7 @@ end
 # Includes many of our custom types and providers, as well as global
 # config. Required.
 
-github "boxen", "3.3.6"
+github "boxen", "3.3.8"
 
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
@@ -40,7 +40,7 @@ github "gcc",        "2.0.100"
 github "git",        "1.3.7"
 github "go",         "2.0.1"
 github "homebrew",   "1.6.0"
-github "hub",        "1.2.0"
+github "hub",        "1.3.0"
 github "inifile",    "1.0.0", :repo => "puppetlabs/puppetlabs-inifile"
 github "nginx",      "1.4.3"
 github "nodejs",     "3.5.0"
@@ -48,7 +48,7 @@ github "openssl",    "1.0.0"
 github "phantomjs",  "2.1.0"
 github "pkgconfig",  "1.0.0"
 github "repository", "2.2.0"
-github "ruby",       "7.1.3"
+github "ruby",       "7.1.6"
 github "stdlib",     "4.1.0", :repo => "puppetlabs/puppetlabs-stdlib"
 github "sudo",       "1.0.0"
 github "xquartz",    "1.1.1"
