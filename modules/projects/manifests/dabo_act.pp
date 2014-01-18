@@ -88,4 +88,11 @@ class projects::dabo_act {
     ]
   }
 
+  # Mailcatcher gem needs to be installed outside of bundler
+  ruby::gem { "mailcatcher for 2.0.0":
+    gem     => 'mailcatcher',
+    ruby    => '2.0.0',
+  }
+
+
 }
