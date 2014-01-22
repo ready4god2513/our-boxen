@@ -88,6 +88,26 @@ class projects::dabo_act {
     ]
   }
 
+  ## rake parallel:create
+  exec { "rake parallel:create dabo_act":
+    provider => 'shell',
+    command => "${bundle} exec rake parallel:create'",
+    cwd => "${boxen::config::srcdir}/dabo_act",
+    require => [
+      Exec["rake db:test:prepare dabo_act"]
+    ]
+  }
+
+  ## rake parallel:prepare
+  exec { "rake parallel:prepare dabo_act":
+    provider => 'shell',
+    command => "${bundle} exec rake parallel:prepare'",
+    cwd => "${boxen::config::srcdir}/dabo_act",
+    require => [
+      Exec["rake parallel:create dabo_act"]
+    ]
+  }
+
   # Mailcatcher gem needs to be installed outside of bundler
   ruby::gem { "mailcatcher for 2.0.0":
     gem     => 'mailcatcher',
