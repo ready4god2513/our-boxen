@@ -22,6 +22,12 @@ class projects::dabo_act {
       require => Repository["${boxen::config::srcdir}/dabo_act"]
   }
 
+  boxen::env_script { 'redistogo':
+    ensure   => $ensure,
+    content  => template('/opt/boxen/repo/modules/projects/templates/dabo_act/redistogo.sh.erb'),
+    priority => 'lowest',
+  }
+
   ## rbenv-installed gems cannot be run in the boxen installation environment
   ## which uses the system ruby. The environment must be cleared (env -i)
   ## so an installed ruby (and gems) can be used in a new shell.
