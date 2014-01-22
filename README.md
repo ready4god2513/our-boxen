@@ -21,7 +21,7 @@ This is Dabo's incarnation of [GitHub's Boxen](https://boxen.github.com). Automa
 ```bash
 sudo mkdir -p /opt/boxen
 sudo chown ${USER}:staff /opt/boxen
-git clone https://github.com/dabohealth/our-boxen.git /opt/boxen/repo
+git clone https://github.com/dabohealth/dabo-boxen.git /opt/boxen/repo
 cd /opt/boxen/repo
 script/boxen --debug --profile
 ```
