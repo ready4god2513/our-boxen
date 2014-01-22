@@ -2,7 +2,7 @@ class projects::dabo_act {
   include phantomjs::1_9_0
   include heroku
 
-  $dabo_ruby_version = "2.0.0-p353"
+  $dabo_ruby_version = '2.0.0-p353'
 
   boxen::project { 'dabo_act':
     redis         => true,
@@ -35,6 +35,9 @@ class projects::dabo_act {
   $bundle = "env -i zsh -c 'source /opt/boxen/env.sh && REDISTOGO_URL=redis://localhost:16379 RBENV_VERSION=${dabo_ruby_version} bundle"
 
   ## NOTE: don't forget the trailing single quote in the command!
+  ## e.g.
+  ## command => "${bundle} install'"
+
   ## bundle install
   exec { "bundle install dabo_act":
     provider => 'shell',
@@ -126,9 +129,9 @@ class projects::dabo_act {
   }
 
   # Mailcatcher gem needs to be installed outside of bundler
-  ruby::gem { "mailcatcher for 2.0.0":
+  ruby::gem { "mailcatcher for ${dabo_ruby_version}":
     gem     => 'mailcatcher',
-    ruby    => '2.0.0',
+    ruby    => $dabo_ruby_version,
   }
 
 
