@@ -92,10 +92,16 @@ After the initial Boxen run, you can use Boxen to clone and automagically setup 
 Boxen will:
 
 * Clone the repo
+* Ensure the correct version of Ruby is installed
 * Ensure Redis, Postgresql, PhantomJS are all installed and running
-* Install project version of Ruby and automatically run `bundle install`
+* Install Heroku command line tools
 * Prepare default config/database.yml
-* Load seed data and sample data
+* Prepare default .env
+* Install project version of Ruby and automatically run `bundle install`
+* Run migrations and load seed data and sample data
+* Prepare databases for parallel tests *(see [https://github.com/dabohealth/dabo_act#testing](https://github.com/dabohealth/dabo_act#testing) for more info)*
+* Ensure $REDISTOGO_URL is set in your shell
+* Install Mailcatcher gem
 
 At this point you should be done—you can stop reading and start shipping. For more information about the Boxen project, including more details about custom manifests, check out GitHub's official [Boxen page.](https://github.com/boxen/our-boxen)
 
