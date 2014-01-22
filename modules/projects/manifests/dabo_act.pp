@@ -114,6 +114,17 @@ class projects::dabo_act {
     ]
   }
 
+  ## rake secret > .env
+  exec { "rake secret dabo_act":
+    provider => 'shell',
+    command => "echo DABO_RAILS_SECRET_KEY_BASE=`${bundle} exec rake secret'` >> .env",
+    cwd => "${boxen::config::srcdir}/dabo_act",
+    require => [
+      File["${boxen::config::srcdir}/dabo_act/.env"],
+      Exec["rake db:migrate dabo_act"]
+    ]
+  }
+
   # Mailcatcher gem needs to be installed outside of bundler
   ruby::gem { "mailcatcher for 2.0.0":
     gem     => 'mailcatcher',
