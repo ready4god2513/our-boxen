@@ -219,6 +219,11 @@ GITHUBTARBALL
     transmission (1.1.0)
 
 GITHUBTARBALL
+  remote: boxen/puppet-vagrant
+  specs:
+    vagrant (3.0.4)
+
+GITHUBTARBALL
   remote: boxen/puppet-virtualbox
   specs:
     virtualbox (1.0.10)
@@ -302,6 +307,7 @@ DEPENDENCIES
   sysctl (= 1.0.0)
   tmux (= 1.0.2)
   transmission (= 1.1.0)
+  vagrant (= 3.0.4)
   virtualbox (= 1.0.10)
   xquartz (= 1.1.1)
   zsh (= 1.0.0)

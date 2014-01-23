@@ -85,6 +85,7 @@ github "chrome",            "1.1.2"
 github "zsh",               "1.0.0"
 github "skype",             "1.0.7"
 github "virtualbox",        "1.0.10"
+github "vagrant",           "3.0.4"
 
 # Apps: Users
 github "kindle",            "1.0.1"
