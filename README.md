@@ -102,6 +102,9 @@ Boxen will:
 * Prepare databases for parallel tests *(see [https://github.com/dabohealth/dabo_act#testing](https://github.com/dabohealth/dabo_act#testing) for more info)*
 * Ensure $REDISTOGO_URL is set in your shell
 * Install Mailcatcher gem
+* Setup nginx/dnsmasq to allow accessing the development server at `http://dabo_act.dev/`
 
-At this point you should be done—you can stop reading and start shipping. For more information about the Boxen project, including more details about custom manifests, check out GitHub's official [Boxen page.](https://github.com/boxen/our-boxen)
+At this point you can start the app. You'll need to manually add your AWS credentials to .env. Ask a dev lead on how to do this.
+
+For more information about the Boxen project, including more details about custom manifests, check out GitHub's official [Boxen page.](https://github.com/boxen/our-boxen)
 
