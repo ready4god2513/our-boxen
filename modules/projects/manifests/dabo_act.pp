@@ -22,6 +22,11 @@ class projects::dabo_act {
       require => Repository["${boxen::config::srcdir}/dabo_act"]
   }
 
+  file { "${boxen::config::configdir}/nginx/sites/dabo_act.dev":
+      content => template("/opt/boxen/repo/modules/projects/templates/dabo_act/nginx_dabo_act.erb"),
+       notify => Service['dev.nginx']
+  }
+
   boxen::env_script { 'redistogo':
     ensure   => $ensure,
     content  => template('/opt/boxen/repo/modules/projects/templates/dabo_act/redistogo.sh.erb'),
