@@ -9,6 +9,7 @@ class projects::dabo_act {
     postgresql    => true,
     ruby          => $dabo_ruby_version,
     phantomjs     => '1.9.0',
+    nginx         => true,
     source        => 'dabohealth/dabo_act'
   }
 
@@ -20,11 +21,6 @@ class projects::dabo_act {
   file { "${boxen::config::srcdir}/dabo_act/.env":
       content => template("/opt/boxen/repo/modules/projects/templates/dabo_act/env.erb"),
       require => Repository["${boxen::config::srcdir}/dabo_act"]
-  }
-
-  file { "${boxen::config::configdir}/nginx/sites/dabo_act.dev":
-      content => template("/opt/boxen/repo/modules/projects/templates/dabo_act/nginx_dabo_act.erb"),
-       notify => Service['dev.nginx']
   }
 
   boxen::env_script { 'redistogo':
