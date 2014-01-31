@@ -15,12 +15,14 @@ class projects::dabo_act {
 
   file { "${boxen::config::srcdir}/dabo_act/config/database.yml":
       content => template("/opt/boxen/repo/modules/projects/templates/dabo_act/database.yml.erb"),
-      require => Repository["${boxen::config::srcdir}/dabo_act"]
+      require => Repository["${boxen::config::srcdir}/dabo_act"],
+      replace => "no"
   }
 
   file { "${boxen::config::srcdir}/dabo_act/.env":
       content => template("/opt/boxen/repo/modules/projects/templates/dabo_act/env.erb"),
-      require => Repository["${boxen::config::srcdir}/dabo_act"]
+      require => Repository["${boxen::config::srcdir}/dabo_act"],
+      replace => "no"
   }
 
   boxen::env_script { 'redistogo':
@@ -126,7 +128,8 @@ class projects::dabo_act {
     require => [
       File["${boxen::config::srcdir}/dabo_act/.env"],
       Exec["rake db:migrate dabo_act"]
-    ]
+    ],
+    unless => ["grep DABO_RAILS_SECRET_KEY_BASE .env"]
   }
 
   # Mailcatcher gem needs to be installed outside of bundler
