@@ -5,7 +5,7 @@ development: &default
   timeout: 5000
   port: <%%= ENV["BOXEN_POSTGRESQL_PORT"] || 5432 %>
   host: localhost
-
+  username: <%= scope.lookupvar('::boxen_user') %>
 
 test:
   <<: *default
@@ -13,3 +13,5 @@ test:
   min_messages: warning
   port: <%%= ENV["BOXEN_POSTGRESQL_PORT"] || 5432 %>
   host: localhost
+  username: <%= scope.lookupvar('::boxen_user') %>
+
