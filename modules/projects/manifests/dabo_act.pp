@@ -54,25 +54,13 @@ class projects::dabo_act {
     timeout => 1800
   }
 
-  ## rake db:migrate
-  exec { "rake db:migrate dabo_act":
+  ## rake db:setup
+  exec { "rake db:setup dabo_act":
     provider => 'shell',
-    command => "${bundle} exec rake db:migrate'",
+    command => "${bundle} exec rake db:setup'",
     cwd => "${boxen::config::srcdir}/dabo_act",
     require => [
-      Exec["bundle install dabo_act"],
-      Postgresql::Db['dabo_act_development']
-    ]
-  }
-
-  ## rake db:seed
-  exec { "rake db:seed dabo_act":
-    provider => 'shell',
-    command => "${bundle} exec rake db:seed'",
-    cwd => "${boxen::config::srcdir}/dabo_act",
-    require => [
-      Exec["bundle install dabo_act"],
-      Postgresql::Db['dabo_act_development']
+      Exec["bundle install dabo_act"]
     ]
   }
 
@@ -82,21 +70,8 @@ class projects::dabo_act {
     command => "${bundle} exec rake db:sample_data'",
     cwd => "${boxen::config::srcdir}/dabo_act",
     require => [
-      Exec["rake db:seed dabo_act"],
+      Exec["rake db:setup dabo_act"],
       Postgresql::Db['dabo_act_development']
-    ]
-  }
-
-  ## rake db:test:prepare
-  exec { "rake db:test:prepare dabo_act":
-    provider => 'shell',
-    command => "${bundle} exec rake db:test:prepare'",
-    cwd => "${boxen::config::srcdir}/dabo_act",
-    require => [
-      Exec["bundle install dabo_act"],
-      Exec["rake db:migrate dabo_act"],
-      Postgresql::Db['dabo_act_development'],
-      Postgresql::Db['dabo_act_test']
     ]
   }
 
@@ -106,7 +81,7 @@ class projects::dabo_act {
     command => "${bundle} exec rake parallel:create'",
     cwd => "${boxen::config::srcdir}/dabo_act",
     require => [
-      Exec["rake db:test:prepare dabo_act"]
+      Exec["rake db:setup dabo_act"]
     ]
   }
 
@@ -127,7 +102,7 @@ class projects::dabo_act {
     cwd => "${boxen::config::srcdir}/dabo_act",
     require => [
       File["${boxen::config::srcdir}/dabo_act/.env"],
-      Exec["rake db:migrate dabo_act"]
+      Exec["rake db:setup dabo_act"]
     ],
     unless => ["grep DABO_RAILS_SECRET_KEY_BASE .env"]
   }
