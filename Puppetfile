@@ -36,7 +36,7 @@ github "boxen", "3.3.8"
 
 github "dnsmasq",    "1.0.1"
 github "foreman",    "1.1.0"
-github "gcc",        "2.0.100"
+github "gcc",        "2.0.1"
 github "git",        "1.3.7"
 github "go",         "2.0.1"
 github "homebrew",   "1.6.0"
