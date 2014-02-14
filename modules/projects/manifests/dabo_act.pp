@@ -2,6 +2,8 @@ class projects::dabo_act {
   include phantomjs::1_9_0
   include heroku
 
+  require postgresql
+
   $dabo_ruby_version = '2.0.0-p353'
 
   boxen::project { 'dabo_act':
@@ -75,6 +77,17 @@ class projects::dabo_act {
     ]
   }
 
+  ## rake db:fixtures:load
+  exec { "rake db:fixtures:load dabo_act":
+    provider => 'shell',
+    command => "${bundle} exec rake db:fixtures:load'",
+    cwd => "${boxen::config::srcdir}/dabo_act",
+    require => [
+      Exec["rake db:sample_data dabo_act"],
+      Postgresql::Db['dabo_act_development']
+    ]
+  }
+
   ## rake parallel:create
   exec { "rake parallel:create dabo_act":
     provider => 'shell',
@@ -105,6 +118,16 @@ class projects::dabo_act {
       Exec["rake db:setup dabo_act"]
     ],
     unless => ["grep DABO_RAILS_SECRET_KEY_BASE .env"]
+  }
+
+  ## ensure pg_stat_statements is loaded (needed for Heroku DB dumps)
+  exec { "psql CREATE EXTENSION pg_stat_statements":
+    provider => 'shell',
+    command  => "psql -p${postgresql::port} -c 'CREATE EXTENSION pg_stat_statements;'",
+    require  => [
+      Postgresql::Db['dabo_act_development']
+    ],
+    unless => ["psql -p${postgresql::port} -c '\\dx' | cut -d \\| -f1 | grep -w pg_stat_statements"]
   }
 
   # Mailcatcher gem needs to be installed outside of bundler
