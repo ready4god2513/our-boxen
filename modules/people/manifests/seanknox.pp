@@ -1,5 +1,6 @@
 class people::seanknox {
 
+  $globalruby = '2.0.0'
 
   include people::seanknox::dotfiles
   include people::seanknox::applications
