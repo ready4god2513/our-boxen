@@ -25,6 +25,16 @@ class people::seanknox::applications {
 
   include sublime_text_2
 
+  package  {  [
+      'htop-osx',
+      'watch',
+      'wget',
+      'tree',
+      'pstree',
+      'apg',
+      ]:
+        ensure => latest,
+  }
   mysql::db { 'mydb': }
 
   ruby::gem { 'pry for $globalruby':
