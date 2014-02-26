@@ -4,7 +4,7 @@ class people::seanknox::sublime {
   include sublime_text_2::config
 
   $sublime_package_dir = "/Users/${::boxen_user}/Library/Application Support/Sublime Text 2/Packages"
-  $dotfiles = "/Users/${boxen_user}/dotfiles"
+  $dotfiles = $people::seanknox::dotfiles
 
   file { [ "$sublime_package_dir/User" ]:
     ensure  => directory,
@@ -16,7 +16,7 @@ class people::seanknox::sublime {
   file { "$sublime_package_dir/User/Preferences.sublime-settings":
     require   => [
       Package['SublimeText2'],
-      Repository["/Users/${::boxen_user}/dotfiles"],
+      Repository["$dotfiles"],
       File["$sublime_package_dir/User"]
     ],
     target => "$dotfiles/Preferences.sublime-settings"
@@ -25,7 +25,7 @@ class people::seanknox::sublime {
   file { "$sublime_package_dir/User/Package Control.sublime-settings":
     require   => [
       Package['SublimeText2'],
-      Repository["/Users/${::boxen_user}/dotfiles"],
+      Repository["$dotfiles"],
       File["$sublime_package_dir/User"]
     ],
     target => "$dotfiles/Package Control.sublime-settings"

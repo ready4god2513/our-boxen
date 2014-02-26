@@ -1,13 +1,16 @@
 class people::seanknox::vim {
 
+  $home = $people::seanknox::home
+  $dotfiles = $people::seanknox::dotfiles
+
   repository { "${boxen::config::srcdir}/maximum-awesome":
     source  => 'square/maximum-awesome'
   }
 
   # Manage dotfiles with Boxen
-  file { "${boxen::config::home}/.gvimrc":
-    target  => "/Users/${boxen_user}/dotfiles/gvimrc",
-    require => Repository["/Users/${boxen_user}/dotfiles"]
+  file { "${home}/.gvimrc":
+    target  => "${dotfiles}/gvimrc",
+    require => Repository["$dotfiles"]
   }
 
   exec { 'install maximum-awesome':

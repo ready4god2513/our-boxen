@@ -1,5 +1,7 @@
 class people::seanknox {
 
+  $home     = "/Users/${::boxen_user}"
+  $dotfiles = "${home}/dotfiles"
   $globalruby = '2.0.0'
 
   include people::seanknox::dotfiles
@@ -8,8 +10,6 @@ class people::seanknox {
   include people::seanknox::sublime
   include people::seanknox::vim
 
-  $home     = "/Users/${::boxen_user}"
-  $dotfiles = "${home}/dotfiles"
 
   repository { $dotfiles:
     source  => 'seanknox/dotfiles'
