@@ -5,7 +5,8 @@ class people::seanknox {
   include people::seanknox::dotfiles
   include people::seanknox::applications
   ##include people::seanknox::config
-  #include people::seanknox::sublime
+  include people::seanknox::sublime
+  include people::seanknox::vim
 
   $home     = "/Users/${::boxen_user}"
   $dotfiles = "${home}/dotfiles"

@@ -1,61 +1,48 @@
 class people::seanknox::sublime {
 
+  include sublime_text_2
+  include sublime_text_2::config
+
   $sublime_package_dir = "/Users/${::boxen_user}/Library/Application Support/Sublime Text 2/Packages"
+  $dotfiles = "/Users/${boxen_user}/dotfiles"
 
-  file {
-      [ "$sublime_package_dir/User/Preferences.sublime-settings" ]:
-      require => [ Package['SublimeText2'], Repository["/Users/${::boxen_user}/dotfiles"] ],
-      target  => "/Users/${::boxen_user}/dotfiles/Preferences.sublime-settings",
-    }
+  file { [ "$sublime_package_dir/User" ]:
+    ensure  => directory,
+    require => [
+      Package['SublimeText2'],
+    ]
+  }
 
-  file {
-    [ "$sublime_package_dir/User" ]:
-    ensure => directory,
-    require => Package['SublimeText2'],
+  file { "$sublime_package_dir/User/Preferences.sublime-settings":
+    require   => [
+      Package['SublimeText2'],
+      Repository["/Users/${::boxen_user}/dotfiles"],
+      File["$sublime_package_dir/User"]
+    ],
+    target => "$dotfiles/Preferences.sublime-settings"
+  }
+
+  file { "$sublime_package_dir/User/Package Control.sublime-settings":
+    require   => [
+      Package['SublimeText2'],
+      Repository["/Users/${::boxen_user}/dotfiles"],
+      File["$sublime_package_dir/User"]
+    ],
+    target => "$dotfiles/Package Control.sublime-settings"
   }
 
   sublime_text_2::package { 'Package Control':
-    source => 'wbond/sublime_package_control',
+    source  => 'wbond/sublime_package_control',
     require => Package['SublimeText2']
   }
 
-  sublime_text_2::package { 'Theme - Soda':
-    source => 'buymeasoda/soda-theme',
-    require => Package['SublimeText2'],
-  }
-
-  sublime_text_2::package { 'Rspec':
-    source => 'SublimeText/RSpec',
+  sublime_text_2::package { 'sublime-file-operations':
+    source  => 'chasetopher/sublime-file-operations',
     require => Package['SublimeText2']
   }
 
-  sublime_text_2::package { 'Apply Syntax':
-    source => 'facelessuser/ApplySyntax',
-    require => Package['SublimeText2']
-  }
-
-  sublime_text_2::package { 'Git':
-    source => 'kemayo/sublime-text-2-git',
-    require => Package['SublimeText2']
-  }
-
-  sublime_text_2::package { 'Ctags':
-    source => 'SublimeText/CTags',
-    require => Package['SublimeText2']
-  }
-
-  sublime_text_2::package { 'Zen Coding':
-    source => 'sergeche/emmet-sublime',
-    require => Package['SublimeText2']
-  }
-
-  sublime_text_2::package { 'Sublime Linter':
-    source => 'SublimeLinter/SublimeLinter',
-    require => Package['SublimeText2']
-  }
-
-  sublime_text_2::package { 'Nettuts+ Fetch':
-    source => 'weslly/Nettuts-Fetch',
+  sublime_text_2::package { 'sublime-text-puppet':
+    source  => 'eklein/sublime-text-puppet',
     require => Package['SublimeText2']
   }
 }

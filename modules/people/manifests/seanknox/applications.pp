@@ -23,8 +23,6 @@ class people::seanknox::applications {
   include protobuf
   /* include vim */
 
-  include sublime_text_2
-
   package  {  [
       'htop-osx',
       'watch',
