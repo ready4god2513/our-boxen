@@ -16,20 +16,20 @@ class projects::dabo_act {
   }
 
   file { "${boxen::config::srcdir}/dabo_act/config/database.yml":
-      content => template('/opt/boxen/repo/modules/projects/templates/dabo_act/database.yml.erb'),
+      content => template('projects/dabo_act/database.yml.erb'),
       require => Repository["${boxen::config::srcdir}/dabo_act"],
       replace => 'no'
   }
 
   file { "${boxen::config::srcdir}/dabo_act/.env":
-      content => template('/opt/boxen/repo/modules/projects/templates/dabo_act/env.erb'),
+      content => template('projects/dabo_act/env.erb'),
       require => Repository["${boxen::config::srcdir}/dabo_act"],
       replace => 'no'
   }
 
   boxen::env_script { 'redistogo':
     ensure   => $ensure,
-    content  => template('/opt/boxen/repo/modules/projects/templates/dabo_act/redistogo.sh.erb'),
+    content  => template('projects/dabo_act/redistogo.sh.erb'),
     priority => 'lowest',
   }
 
