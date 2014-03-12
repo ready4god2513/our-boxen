@@ -69,7 +69,7 @@ node default {
   include nodejs::v0_10
 
   $global_ruby_version = "2.0.0"
-  $global_nodejs_version = "v0.10.5"
+  $global_nodejs_version = "v0.10.26"
 
   ensure_resource('ruby::version', '1.9.3')
   ensure_resource('ruby::version', '2.0.0')
