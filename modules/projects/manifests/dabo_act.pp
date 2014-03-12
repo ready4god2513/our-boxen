@@ -123,7 +123,7 @@ class projects::dabo_act {
   ## ensure pg_stat_statements is loaded (needed for Heroku DB dumps)
   exec { 'psql CREATE EXTENSION pg_stat_statements':
     provider  => 'shell',
-    command   => "psql -p${postgresql::port} -c 'CREATE EXTENSION pg_stat_statements;'",
+    command   => "psql -p${postgresql::port} dabo_act_development -c 'CREATE EXTENSION pg_stat_statements;'",
     require   => [
       Postgresql::Db['dabo_act_development']
     ],
