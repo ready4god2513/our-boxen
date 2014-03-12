@@ -34,19 +34,19 @@ class people::seanknox::applications {
   }
   mysql::db { 'mydb': }
 
-  ruby::gem { 'pry for $globalruby':
+  ruby::gem { "pry for $globalruby":
     gem     => 'pry',
     ruby    => "$globalruby",
   }
-  ruby::gem { 'pry-nav for $globalruby':
+  ruby::gem { "pry-nav for $globalruy":
     gem     => 'pry-nav',
     ruby    => "$globalruby",
   }
-  ruby::gem { 'pry-theme for $globalruby':
+  ruby::gem { "pry-theme for $globalruby":
     gem     => 'pry-theme',
     ruby    => "$globalruby",
   }
-  ruby::gem { 'awesome_print for $globalruby':
+  ruby::gem { "awesome_print for $globalruby":
     gem     => 'awesome_print',
     ruby    => "$globalruby",
   }
