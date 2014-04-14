@@ -64,27 +64,15 @@ node default {
   # }
 
   # node versions
-  # include nodejs::v0_6
-  # include nodejs::v0_8
+  include nodejs::v0_6
+  include nodejs::v0_8
   include nodejs::v0_10
 
-  $global_ruby_version = "2.0.0"
-  $global_nodejs_version = "v0.10.26"
-
-  ensure_resource('ruby::version', '1.9.3')
-  ensure_resource('ruby::version', '2.0.0')
-  ensure_resource('ruby::version', '2.1.0')
-
-  # set global ruby version in rbenv
-  class { 'ruby::global':
-    version => $global_ruby_version
-  }
-
-  # set global nodejs version
-  class { 'nodejs::global':
-    version => $global_nodejs_version
-  }
-
+  # default ruby versions
+  ruby::version { '1.9.3': }
+  ruby::version { '2.0.0': }
+  ruby::version { '2.1.0': }
+  ruby::version { '2.1.1': }
 
   # common, useful packages
   package {
@@ -99,6 +87,19 @@ node default {
   file { "${boxen::config::srcdir}/our-boxen":
     ensure => link,
     target => $boxen::config::repodir
+  }
+
+  $global_ruby_version = "2.0.0"
+  $global_nodejs_version = "v0.10.26"
+
+  # set global ruby version in rbenv
+  class { 'ruby::global':
+    version => $global_ruby_version
+  }
+
+  # set global nodejs version
+  class { 'nodejs::global':
+    version => $global_nodejs_version
   }
 
   # COMMON APPS

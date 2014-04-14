@@ -32,7 +32,7 @@ Otherwise, follow instructions below.
 
 Install Boxen by either:
 * Using [Dabo Boxen Web](https://dabo-boxen-web.herokuapp.com) *(easiest)*, or
-* Open Terminal.app and do the following:
+* Alternatively, open Terminal.app and do the following:
 
 ```bash
 sudo mkdir -p /opt/boxen
@@ -41,6 +41,16 @@ git clone https://github.com/dabohealth/dabo-boxen.git /opt/boxen/repo
 cd /opt/boxen/repo
 script/boxen --debug --profile
 ```
+**Note**
+If you are creating a fresh install on Xcode 5.1 there is a clang issue with
+certain Ruby Gems. There is a Stackoverflow post [here](http://stackoverflow.com/questions/22352838/ruby-gem-install-json-fails-on-mavericks-and-xcode-5-1-unknown-argument-mul)
+
+To run the Boxen script follow these instructions
+```
+cd /opt/boxen/repo
+ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future ./script/boxen
+```
+
 
 Boxen will run for awhile, depending on the speed of your computer. After it finishes, your provisioning is now complete. Open a new terminal window to start using Boxen.
 
