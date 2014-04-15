@@ -127,7 +127,7 @@ class projects::dabo_act {
     require   => [
       Postgresql::Db['dabo_act_development']
     ],
-    unless    => ["psql -p${postgresql::port} -c '\\dx' | cut -d \\| -f1 | grep -w pg_stat_statements"]
+    unless    => ["psql -p${postgresql::port} dabo_act_development -c '\\dx' | cut -d \\| -f1 | grep -w pg_stat_statements"]
   }
 
   # Mailcatcher gem needs to be installed outside of bundler
