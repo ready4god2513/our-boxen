@@ -112,6 +112,8 @@ node default {
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
+  # Download and enable software updates
+  include osx::software_update
 
   ## Common OSX default configurations
   include osx::global::expand_print_dialog ## expand the print dialog by default
