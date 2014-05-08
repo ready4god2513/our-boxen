@@ -10,7 +10,7 @@ class projects::dabo_act {
     redis         => true,
     postgresql    => true,
     ruby          => $dabo_ruby_version,
-    phantomjs     => '1.9.0',
+    phantomjs     => '1.9.7',
     nginx         => true,
     source        => 'dabohealth/dabo_act'
   }
