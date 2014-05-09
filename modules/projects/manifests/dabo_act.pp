@@ -1,10 +1,13 @@
 class projects::dabo_act {
-  include phantomjs::1_9_0
   include heroku
 
   require postgresql
 
   $dabo_ruby_version = '2.0.0-p353'
+  class {'phantomjs':
+    phantomenv_repository => 'dabohealth/phantomenv',
+    phantomenv_version    => 'v0.0.9'
+  }
 
   boxen::project { 'dabo_act':
     redis         => true,
