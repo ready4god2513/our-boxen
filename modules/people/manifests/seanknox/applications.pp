@@ -34,21 +34,21 @@ class people::seanknox::applications {
   }
   mysql::db { 'mydb': }
 
-  ruby::gem { "pry for $globalruby":
+  ruby_gem { "pry for $globalruby":
     gem     => 'pry',
-    ruby    => "$globalruby",
+    ruby_version    => "$globalruby",
   }
-  ruby::gem { "pry-nav for $globalruy":
+  ruby_gem { "pry-nav for $globalruby":
     gem     => 'pry-nav',
-    ruby    => "$globalruby",
+    ruby_version    => "$globalruby",
   }
-  ruby::gem { "pry-theme for $globalruby":
+  ruby_gem { "pry-theme for $globalruby":
     gem     => 'pry-theme',
-    ruby    => "$globalruby",
+    ruby_version    => "$globalruby",
   }
-  ruby::gem { "awesome_print for $globalruby":
+  ruby_gem { "awesome_print for $globalruby":
     gem     => 'awesome_print',
-    ruby    => "$globalruby",
+    ruby_version    => "$globalruby",
   }
 }
 

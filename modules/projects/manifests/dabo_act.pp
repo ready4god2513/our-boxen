@@ -18,6 +18,12 @@ class projects::dabo_act {
     source        => 'dabohealth/dabo_act'
   }
 
+  ruby_gem { 'bundler for all rubies':
+    gem          => 'bundler',
+    version      => '~> 1.0',
+    ruby_version => '*',
+  }
+
   file { "${boxen::config::srcdir}/dabo_act/config/database.yml":
       content => template('projects/dabo_act/database.yml.erb'),
       require => Repository["${boxen::config::srcdir}/dabo_act"],
@@ -52,7 +58,7 @@ class projects::dabo_act {
     command   => "${bundle} install'",
     cwd       => "${boxen::config::srcdir}/dabo_act",
     require   => [
-      Ruby::Gem["bundler for ${dabo_ruby_version}"],
+      Ruby_Gem["bundler for all rubies"],
       Service['postgresql']
     ],
     unless    => "${bundle} check'",
@@ -134,10 +140,9 @@ class projects::dabo_act {
   }
 
   # Mailcatcher gem needs to be installed outside of bundler
-  ruby::gem { "mailcatcher for ${dabo_ruby_version}":
+  ruby_gem { "mailcatcher for $dabo_ruby_version":
     gem       => 'mailcatcher',
-    ruby      => $dabo_ruby_version,
+    ruby_version      => $dabo_ruby_version,
+    require   => Ruby_Gem["bundler for all rubies"],
   }
-
-
 }
