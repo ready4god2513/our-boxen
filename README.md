@@ -96,16 +96,15 @@ Periodically you should update and re-run Boxen to update your system—any requ
 1. Grab the latest version of Boxen: `cd /opt/boxen/repo && git pull`
 2. Run Boxen: `boxen all`
 
-*The 'all' parameter is important—it tells Boxen to install all additional projects (including dabo_act) along with global configuration.* 
+*The 'all' parameter is important—it tells Boxen to install all additional projects (including dabo_act) along with global configuration.*
 
 ## Setup for the dabo_act project
 
 After the (initial bootstraping run)[https://github.com/dabohealth/dabo-boxen/blob/master/README.md#boxenify-me], you can use Boxen to clone and automagically setup [dabo_act](https://github.com/dabohealth/dabo_act). Setup the project by:
 
-`$ boxen all` 
-- install all projects (at the moment there is only `dabo_act`, but running `boxen all` is good for future-proofing additional Dabo-managed projects).
-`$ boxen dabo_act` 
-- install only the dabo_act project.
+* `boxen all`: install all projects (at the moment there is only dabo_act, but running boxen all is good for future-proofing additional Dabo-managed projects).
+
+* `boxen dabo_act`: install only the dabo_act project.
 
 In either case Boxen will:
 
