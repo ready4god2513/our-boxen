@@ -5,6 +5,7 @@ This is Dabo's incarnation of [GitHub's Boxen](https://boxen.github.com). Automa
 *This guide assumes you are running Boxen on a __clean install__ of OS X 10.8 (Mountain Lion) or 10.9 (Mavericks).Tested on:*
 - *clean OS X 10.8*
 - *clean OS X 10.9*
+- Command Line Tools or Xcode >= `5.1.0.0.1.1396320587`
 
 ### Dependencies
 
@@ -16,7 +17,7 @@ How do you do it?
 #### OS X 10.9 (Mavericks)
 
 If you are using [dabo-boxen-web](https://dabo-boxen-web.herokuapp.com)
-or newer, it will be automatically installed as part of Boxen.
+or newer, Command Line Tools will be automatically installed as part of Boxen.
 Otherwise, follow instructions below.
 
 #### OS X < 10.9
@@ -39,20 +40,10 @@ sudo mkdir -p /opt/boxen
 sudo chown ${USER}:staff /opt/boxen
 git clone https://github.com/dabohealth/dabo-boxen.git /opt/boxen/repo
 cd /opt/boxen/repo
-script/boxen --debug --profile
-```
-**Note**
-If you are creating a fresh install on Xcode 5.1 there is a clang issue with
-certain Ruby Gems. There is a Stackoverflow post [here](http://stackoverflow.com/questions/22352838/ruby-gem-install-json-fails-on-mavericks-and-xcode-5-1-unknown-argument-mul)
-
-To run the Boxen script follow these instructions
-```
-cd /opt/boxen/repo
-ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future ./script/boxen
+script/boxen
 ```
 
-
-Boxen will run for awhile, depending on the speed of your computer. After it finishes, your provisioning is now complete. Open a new terminal window to start using Boxen.
+Boxen will run for awhile, depending on the speed of your computer. After it finishes, your provisioning is now complete. Open a new terminal window to reinitialize your shell and start using your system.
 
 ## What You Get
 
@@ -89,17 +80,34 @@ Boxen ensures it is first in your $PATH so there is no more confusion to where y
 
 Run `boxen --env` to see a full list.
 
+### Where Boxen lives
+Boxen is installed into `/opt/boxen`, as is all software installed through Boxen (Homebrew, rbenv, phantomenv, nodenv, etc.)
+#### Homebrew
+Homebrew is installed into `/opt/boxen/homebrew`, not the usual `/usr/local/` path. Any Homebrew package *should* work fine, but some packages may have hardcoded `/usr/local/` as an install path.
+#### rbenv / Ruby
+`rbenv` is installed into `/opt/boxen/rbenv`. All ruby versions are installed into `/opt/rubies`.
+
 ### Customizing your Boxen install
 You can setup Boxen to install additional software or configuration by editing your personal .pp manifest file at `modules/people/manifests/$YOUR_GITHUB_HANDLE.pp`. This is useful if you want to do things like install your dotfiles, change your shell, or other important tasks. See [Sean Knox](https://github.com/seanknox) for help setting up a custom manifest, or take a look at an example one here [here](https://github.com/boxen/our-boxen/blob/master/modules/people/README.md).
 
+### Updating Boxen
+Periodically you should update and re-run Boxen to update your system—any required Ruby versions, Homebrew packages, etc. will automatically be upgraded or installed for you. Updating is a two-step process:
 
-## Initial Setup for the dabo_act Project
+1. Grab the latest version of Boxen: `cd /opt/boxen/repo && git pull`
+2. Run Boxen: `boxen all`
 
-After the initial Boxen run, you can use Boxen to clone and automagically setup [dabo_act](https://github.com/dabohealth/dabo_act). Setup the project by:
+*The 'all' parameter is important—it tells Boxen to install all additional projects (including dabo_act) along with global configuration.* 
 
-`$ boxen dabo_act`
+## Setup for the dabo_act project
 
-Boxen will:
+After the (initial bootstraping run)[https://github.com/dabohealth/dabo-boxen/blob/master/README.md#boxenify-me], you can use Boxen to clone and automagically setup [dabo_act](https://github.com/dabohealth/dabo_act). Setup the project by:
+
+`$ boxen all` 
+- install all projects (at the moment there is only `dabo_act`, but running `boxen all` is good for future-proofing additional Dabo-managed projects).
+`$ boxen dabo_act` 
+- install only the dabo_act project.
+
+In either case Boxen will:
 
 * Clone the repo
 * Ensure the correct version of Ruby is installed
