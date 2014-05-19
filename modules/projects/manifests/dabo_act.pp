@@ -139,10 +139,10 @@ class projects::dabo_act {
     unless    => ["psql -p${postgresql::port} dabo_act_development -c '\\dx' | cut -d \\| -f1 | grep -w pg_stat_statements"]
   }
 
-  # Mailcatcher gem needs to be installed outside of bundler
-  # ruby_gem { "mailcatcher for $dabo_ruby_version":
-  #   gem       => 'mailcatcher',
-  #   ruby_version      => $dabo_ruby_version,
-  #   require   => Ruby_Gem["bundler for all rubies"],
-  # }
+  ## Mailcatcher gem needs to be installed outside of bundler
+  ruby_gem { "mailcatcher for $dabo_ruby_version":
+    gem       => 'mailcatcher',
+    ruby_version      => $dabo_ruby_version,
+    require   => Ruby_Gem["bundler for all rubies"],
+  }
 }
