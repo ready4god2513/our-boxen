@@ -104,7 +104,6 @@ node default {
 
   # COMMON APPS
   include chrome
-  include backblaze
   include dropbox
   include iterm2::stable
   include virtualbox

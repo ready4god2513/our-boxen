@@ -69,7 +69,6 @@ Boxen will run for awhile, depending on the speed of your computer. After it fin
 * iTerm2
 * Virtualbox
 * tmux
-* Backblaze installer
 
 ### Shell setup and Environment variables
 Boxen ensures it is first in your $PATH so there is no more confusion to where your Ruby/Python/gem/etc. binary is. Additionally, Boxen setups up handy shell variables for Boxen and all services installed through Boxen. For example:
