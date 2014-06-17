@@ -3,6 +3,12 @@ class projects::dabo_act {
 
   require postgresql
 
+  package { [
+    'chromedriver'
+    ]:
+      ensure => latest,
+  }
+
   $dabo_ruby_version = '2.0.0-p353'
   class {'phantomjs':
     phantomenv_repository => 'dabohealth/phantomenv',
