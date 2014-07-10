@@ -28,12 +28,46 @@ Otherwise, follow instructions below.
 1. Go to the Downloads tab.
 1. Install the Command Line Tools.
 
+<<<<<<< HEAD
 
 ### Boxenify me
 
 Install Boxen by either:
 * Using [Dabo Boxen Web](https://dabo-boxen-web.herokuapp.com) *(easiest)*, or
 * Alternatively, open Terminal.app and do the following:
+=======
+### Bootstrapping
+
+Create a **new** git repository somewhere on the internet.
+It can be private or public -- it really doesn't matter.
+If you're making a repository on GitHub, you _may not_ want to fork this repo
+to get started.
+The reason for that is that you can't really make private forks of public
+repositories easily.
+
+Once you've done that, you can run the following to bootstrap
+your boxen:
+
+```
+sudo mkdir -p /opt/boxen
+sudo chown ${USER}:staff /opt/boxen
+git clone https://github.com/boxen/our-boxen /opt/boxen/repo
+cd /opt/boxen/repo
+git remote rm origin
+git remote add origin <the location of my new git repository>
+git push -u origin master
+```
+
+Now that your boxen is bootstrapped, you can run the following to
+install the default configuration from this repo:
+
+```
+cd /opt/boxen/repo
+./script/boxen
+```
+
+### Distributing
+>>>>>>> upstream/master
 
 ```bash
 sudo mkdir -p /opt/boxen
