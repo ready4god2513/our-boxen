@@ -67,7 +67,7 @@ github "sysctl",            "1.0.0"
 
 # Development/Libs
 github "python",            "1.3.0"
-github "redis",             "2.1.0"
+github "redis",             "3.0.3"
 github "riak",              "1.1.0"
 github "postgresql",        "3.0.1"
 github "pow",               "1.0.0"
@@ -97,8 +97,8 @@ github "wget",           "1.0.1"
 
 # Apps: Users
 github "kindle",            "1.0.1"
-github "alfred",            "1.1.7"
+github "alfred",            "1.2.0"
 github "transmission",      "1.1.0"
-github "onepassword",       "1.1.0"
+github "onepassword",       "1.1.2"
 github "skitch",            "1.0.2"
 github "flux",              "1.0.0"
