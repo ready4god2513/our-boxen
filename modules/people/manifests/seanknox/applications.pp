@@ -20,11 +20,11 @@ class people::seanknox::applications {
   include openssl
   include cmake
   include protobuf
+  include wget
 
   package  {  [
       'htop-osx',
       'watch',
-      'wget',
       'tree',
       'pstree',
       'apg',

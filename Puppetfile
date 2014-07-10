@@ -93,6 +93,7 @@ github "zsh",               "1.0.0"
 github "skype",             "1.0.7"
 github "virtualbox",        "1.0.10"
 github "vagrant",           "3.0.4"
+github "wget",           "1.0.1"
 
 # Apps: Users
 github "kindle",            "1.0.1"
