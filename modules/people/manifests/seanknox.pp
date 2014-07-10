@@ -8,7 +8,6 @@ class people::seanknox {
   include people::seanknox::applications
   ##include people::seanknox::config
   include people::seanknox::sublime
-  include people::seanknox::vim
 
 
   repository { $dotfiles:

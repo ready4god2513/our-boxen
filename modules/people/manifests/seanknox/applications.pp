@@ -7,7 +7,6 @@ class people::seanknox::applications {
   include iterm2::stable
   include dropbox
   include kindle
-  include macvim
   include gitx::dev
   include python
   include mysql
