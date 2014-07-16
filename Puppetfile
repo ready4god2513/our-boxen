@@ -78,7 +78,7 @@ github "ctags",             "1.0.0"
 github "mysql",             "1.2.0"
 
 # Apps: All
-github "iterm2",            "1.0.6"
+github "iterm2",            "1.1.2"
 github "macvim",            "1.0.0"
 github "gitx",              "1.2.0"
 github "dropbox",           "1.2.0"
