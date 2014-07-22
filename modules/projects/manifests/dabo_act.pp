@@ -1,5 +1,6 @@
 class projects::dabo_act {
   include heroku
+  include virtualbox
 
   require postgresql
 
