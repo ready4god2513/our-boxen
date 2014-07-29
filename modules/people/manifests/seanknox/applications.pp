@@ -21,6 +21,7 @@ class people::seanknox::applications {
   include cmake
   include protobuf
   include wget
+  include rdio
 
   package  {  [
       'htop-osx',

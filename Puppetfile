@@ -103,4 +103,5 @@ github "onepassword",       "1.1.2"
 github "skitch",            "1.0.2"
 github "flux",              "1.0.0"
 github "flowdock",              "1.0.0"
+github "rdio",              "1.0.0"
 
