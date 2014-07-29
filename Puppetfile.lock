@@ -39,6 +39,11 @@ GITHUBTARBALL
     emacs (1.1.0)
 
 GITHUBTARBALL
+  remote: boxen/puppet-flowdock
+  specs:
+    flowdock (1.0.0)
+
+GITHUBTARBALL
   remote: boxen/puppet-flux
   specs:
     flux (1.0.0)
@@ -272,6 +277,7 @@ DEPENDENCIES
   dnsmasq (= 1.0.1)
   dropbox (= 1.2.0)
   emacs (= 1.1.0)
+  flowdock (= 1.0.0)
   flux (= 1.0.0)
   foreman (= 1.2.0)
   gcc (= 2.0.101)
