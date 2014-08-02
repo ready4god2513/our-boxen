@@ -1,7 +1,6 @@
 class projects::dabo_act {
   include heroku
   include virtualbox
-  include flowdock
 
   require postgresql
 

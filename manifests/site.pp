@@ -109,6 +109,9 @@ node default {
   include iterm2::stable
   include virtualbox
   include tmux
+  include flowdock
+  include sublime_text_2
+  include googledrive
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
@@ -123,7 +126,6 @@ node default {
   include osx::global::enable_keyboard_control_access ## Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 
   ## Finder
-  include osx::finder::show_all_on_desktop
   include osx::finder::unhide_library
 
   boxen::osx_defaults { 'Use Column view in all Finder windows by default':
