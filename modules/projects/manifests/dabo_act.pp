@@ -1,6 +1,7 @@
 class projects::dabo_act {
   include heroku
   include virtualbox
+  include sublime_text
 
   require postgresql
 

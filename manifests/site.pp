@@ -110,7 +110,6 @@ node default {
   include virtualbox
   include tmux
   include flowdock
-  include sublime_text_2
   include googledrive
 
   # OS X CONFIG
