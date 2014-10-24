@@ -90,8 +90,56 @@ also be cloned and setup in `~/src/dabo_act`. Yippee!
 * Findutils
 * GNU tar
 * The Silver Searcher (`ag` command: a faster alternative to `ack`)
+
+### Including boxen modules from github (boxen/puppet-<name>)
+
+You must add the github information for your added Puppet module into your Puppetfile at the root of your
+boxen repo (ex. /path/to/your-boxen/Puppetfile):
+
+    # Core modules for a basic development environment. You can replace
+    # some/most of these if you want, but it's not recommended.
+
+    github "repository", "2.0.2"
+    github "dnsmasq",    "1.0.0"
+    github "gcc",        "1.0.0"
+    github "git",        "1.2.2"
+    github "homebrew",   "1.1.2"
+    github "hub",        "1.0.0"
+    github "inifile",    "0.9.0", :repo => "cprice404/puppetlabs-inifile"
+    github "nginx",      "1.4.0"
+    github "nodejs",     "2.2.0"
+    github "ruby",       "4.1.0"
+    github "stdlib",     "4.0.2", :repo => "puppetlabs/puppetlabs-stdlib"
+    github "sudo",       "1.0.0"
+
+    # Optional/custom modules. There are tons available at
+    # https://github.com/boxen.
+
+    github "java",     "1.6.0"
+
 * tmux
+includes the Java module from Github using the tag "1.6.0" from the github repository
 * The [dabo_act](https://github.com/dabohealth/dabo_act) application (almost) completely configured and ready to run.
+and takes the name of the module, the version, and optional repo location:
+
+    def github(name, version, options = nil)
+      options ||= {}
+      options[:repo] ||= "boxen/puppet-#{name}"
+      mod name, version, :github_tarball => options[:repo]
+    end
+
+Now Puppet knows where to download the module from when you include it in your site.pp or mypersonal.pp file:
+
+    # include the java module referenced in my Puppetfile with the line
+    # github "java",     "1.6.0"
+    include java
+
+### Hiera
+
+Hiera is preferred mechanism to make changes to module defaults (e.g. default
+global ruby version, service ports, etc). This repository supplies a
+starting point for your Hiera configuration at `config/hiera.yml`, and an
+example data file at `hiera/common.yaml`. See those files for more details.
 
 ### Mac Apps
 * Chrome
