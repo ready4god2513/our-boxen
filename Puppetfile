@@ -62,7 +62,7 @@ github "xquartz",     "1.2.1"
 github "module-data", "0.0.3", :repo => "ripienaar/puppet-module-data"
 
 # System (additional)
-github "osx",               "2.2.2"
+github "osx",               "2.7.1"
 github "sysctl",            "1.0.0"
 
 # Development/Libs
