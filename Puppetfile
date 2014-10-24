@@ -33,7 +33,7 @@ github "boxen", "3.7.0"
 
 # Support for default hiera data in modules
 
-github "module_data", "0.0.3", :repo => "ripienaar/puppet-module-data"
+github "module_data", "0.0.4", :repo => "ripienaar/puppet-module-data"
 
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
@@ -59,7 +59,6 @@ github "xquartz",     "1.2.1"
 
 # Optional/custom modules. There are tons available at
 # https://github.com/boxen.
-github "module-data", "0.0.4", :repo => "ripienaar/puppet-module-data"
 
 # System (additional)
 github "osx",               "2.7.1"
