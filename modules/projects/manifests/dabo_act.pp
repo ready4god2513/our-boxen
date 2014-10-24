@@ -83,24 +83,12 @@ class projects::dabo_act {
     ]
   }
 
-  ## rake db:sample_data
-  exec { 'rake db:sample_data dabo_act':
-    provider  => 'shell',
-    command   => "${bundle} exec rake db:sample_data'",
-    cwd       => "${boxen::config::srcdir}/dabo_act",
-    require   => [
-      Exec['rake db:setup dabo_act'],
-      Postgresql::Db['dabo_act_development']
-    ]
-  }
-
   ## rake db:fixtures:load
   exec { 'rake db:fixtures:load dabo_act':
     provider  => 'shell',
     command   => "${bundle} exec rake db:fixtures:load'",
     cwd       => "${boxen::config::srcdir}/dabo_act",
     require   => [
-      Exec['rake db:sample_data dabo_act'],
       Postgresql::Db['dabo_act_development']
     ]
   }
