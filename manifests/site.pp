@@ -149,9 +149,6 @@ node default {
   }
 
   # Keyboard
-  class { 'osx::global::key_repeat_delay':
-      delay => 0
-  }
   class { 'osx::global::key_repeat_rate':
     rate => 2
   }
