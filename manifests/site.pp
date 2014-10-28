@@ -74,6 +74,14 @@ node default {
   ruby::version { '2.1.0': }
   ruby::version { '2.1.1': }
   ruby::version { '2.1.2': }
+  ruby::version { '2.1.3': }
+  ruby::version { '2.1.4': }
+
+  ruby_gem { 'bundler for all rubies':
+    gem          => 'bundler',
+    version      => '~> 1.0',
+    ruby_version => '*',
+  }
 
   # common, useful packages
   package {
@@ -90,13 +98,7 @@ node default {
     target => $boxen::config::repodir
   }
 
-  $global_ruby_version = "2.0.0"
   $global_nodejs_version = "v0.10.26"
-
-  # set global ruby version in rbenv
-  class { 'ruby::global':
-    version => $global_ruby_version
-  }
 
   # set global nodejs version
   class { 'nodejs::global':

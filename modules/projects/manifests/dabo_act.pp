@@ -11,7 +11,7 @@ class projects::dabo_act {
       ensure => latest,
   }
 
-  $dabo_ruby_version = '2.0.0-p353'
+  $dabo_ruby_version = '2.1.4'
   class {'phantomjs':
     phantomenv_repository => 'dabohealth/phantomenv',
     phantomenv_version    => 'v0.0.9'
@@ -24,12 +24,6 @@ class projects::dabo_act {
     phantomjs     => '1.9.7',
     nginx         => true,
     source        => 'dabohealth/dabo_act'
-  }
-
-  ruby_gem { 'bundler for all rubies':
-    gem          => 'bundler',
-    version      => '~> 1.0',
-    ruby_version => '*',
   }
 
   file { "${boxen::config::srcdir}/dabo_act/config/database.yml":
