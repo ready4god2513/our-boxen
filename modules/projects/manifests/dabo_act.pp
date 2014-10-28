@@ -12,10 +12,6 @@ class projects::dabo_act {
   }
 
   $dabo_ruby_version = '2.1.4'
-  class {'phantomjs':
-    phantomenv_repository => 'dabohealth/phantomenv',
-    phantomenv_version    => 'v0.0.9'
-  }
 
   boxen::project { 'dabo_act':
     redis         => true,
