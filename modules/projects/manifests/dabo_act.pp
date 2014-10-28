@@ -60,6 +60,7 @@ class projects::dabo_act {
     command   => "${bundle} install'",
     cwd       => "${boxen::config::srcdir}/dabo_act",
     require   => [
+      Ruby[$dabo_ruby_version],
       Ruby_Gem["bundler for all rubies"],
       Service['postgresql']
     ],
