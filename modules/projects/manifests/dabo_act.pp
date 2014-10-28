@@ -133,4 +133,13 @@ class projects::dabo_act {
     ruby_version      => $dabo_ruby_version,
     require   => Ruby_Gem["bundler for all rubies"],
   }
+
+  exec { 'pre-commit install dabo_act':
+    provider      => 'shell',
+    command   => "${bundle} exec pre-commit install'",
+    cwd             => "${boxen::config::srcdir}/dabo_act",
+    require => [
+      Exec['bundle install dabo_act']
+    ]
+  }
 }
