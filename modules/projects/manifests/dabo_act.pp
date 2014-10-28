@@ -84,6 +84,7 @@ class projects::dabo_act {
     command   => "${bundle} exec rake db:fixtures:load'",
     cwd       => "${boxen::config::srcdir}/dabo_act",
     require   => [
+      Exec['rake db:setup dabo_act'],
       Postgresql::Db['dabo_act_development']
     ]
   }
