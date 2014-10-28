@@ -98,11 +98,15 @@ node default {
     target => $boxen::config::repodir
   }
 
-  $global_nodejs_version = "v0.10.26"
+  $global_nodejs_version = 'v0.10'
 
   # set global nodejs version
   class { 'nodejs::global':
     version => $global_nodejs_version
+  }
+
+  nodejs::module { 'bower':
+    node_version => $global_nodejs_version
   }
 
   # COMMON APPS
