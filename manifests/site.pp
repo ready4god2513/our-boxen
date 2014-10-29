@@ -63,6 +63,34 @@ node default {
   #   fail('Please enable full disk encryption and try again')
   # }
 
+  git::config::global{
+    'color.ui': value => 'auto';
+    'core.autocrlf': value => 'input';
+    'alias.st':    value => 'status';
+    'alias.a':    value => 'add';
+    'alias.aa':    value => 'add --all';
+    'alias.ci':    value => 'commit';
+    'alias.br':    value => 'branch';
+    'alias.co':    value => 'checkout';
+    'alias.df':    value => 'diff';
+    'alias.pr':    value => 'pull --rebase';
+    'alias.lg':    value => "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)an>%Creset' --abbrev-commit";
+    'alias.hist':  value => "log --pretty=format:'%Cgreen%h%Creset %Cblue%ad%Creset %C(magenta)%cn%Creset%C(yellow)%d%Creset%n        %s' --graph --date=local";
+    'alias.lol':    value => 'log --graph --decorate --pretty=oneline --abbrev-commit';
+    'alias.ls':    value => 'ls-files';
+    'alias.cp':    value => 'cherry-pick';
+    'alias.rp':    value => 'remote prune';
+    'alias.rpo':    value => 'remote prune origin';
+    'alias.pom':  value => 'push origin master';
+    'alias.g':    value => 'grep --break --heading --line-number';
+    'alias.rbm':    value => '!git fetch origin master && git rebase origin/master';
+    'alias.gpc':    value => 'push --set-upstream origin $(git-branch-current 2> /dev/null)';
+    'alias.unstage':    value => 'reset HEAD';
+    'push.default.':    value => 'current';
+    'difftool.prompt':    value => 'false';
+    'grep.linenumber':    value => 'true';
+ }
+
   # node versions
   nodejs::version { 'v0.6': }
   nodejs::version { 'v0.8': }
