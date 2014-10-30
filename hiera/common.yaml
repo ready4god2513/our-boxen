@@ -15,3 +15,8 @@ ruby::version::alias:
   2.0.0: 2.0.0-p594
 
 ruby::global::version: '2.1.4'
+
+ruby::version::env:
+  Darwin:
+    CFLAGS:   "-I%{::homebrew::config::installdir}/include -march=core2 -O3"
+    LDFLAGS:  "-L%{::homebrew::config::installdir}/lib"
