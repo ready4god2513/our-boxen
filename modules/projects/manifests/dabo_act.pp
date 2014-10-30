@@ -11,13 +11,18 @@ class projects::dabo_act {
       ensure => latest,
   }
 
+  package { [
+    'phantomjs'
+    ]:
+      ensure => latest,
+  }
+
   $dabo_ruby_version = '2.1.4'
 
   boxen::project { 'dabo_act':
     redis         => true,
     postgresql    => true,
     ruby          => $dabo_ruby_version,
-    phantomjs     => '1.9.7',
     nginx         => true,
     source        => 'dabohealth/dabo_act'
   }
