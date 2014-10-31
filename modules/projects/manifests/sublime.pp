@@ -21,6 +21,11 @@ class projects::sublime {
     require => Package['Sublime Text']
   }
 
+  sublime_text::package { 'Sodarized Color Theme':
+    source  => 'jrolfs/sodarized',
+    require => Package['Sublime Text']
+  }
+
   sublime_text::package { 'Package Control':
     source  => 'wbond/sublime_package_control',
     require => Package['Sublime Text']
