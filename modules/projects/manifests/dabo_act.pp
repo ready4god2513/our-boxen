@@ -4,15 +4,10 @@ class projects::dabo_act {
   include sublime_text
 
   require postgresql
+  require phantomjs
 
   package { [
     'chromedriver'
-    ]:
-      ensure => latest,
-  }
-
-  package { [
-    'phantomjs'
     ]:
       ensure => latest,
   }
