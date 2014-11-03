@@ -105,4 +105,4 @@ github "onepassword",       "1.1.2"
 github "skitch",            "1.0.3"
 github "flux",              "1.0.1"
 github "rdio",              "1.0.0"
-
+github "sourcetree",        "1.0.0"

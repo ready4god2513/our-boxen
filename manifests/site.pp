@@ -145,6 +145,7 @@ node default {
   include googledrive
   include dash
   include alfred
+  include sourcetree
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
