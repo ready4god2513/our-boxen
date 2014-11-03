@@ -144,6 +144,7 @@ node default {
   include flowdock
   include googledrive
   include dash
+  include alfred
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
