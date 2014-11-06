@@ -137,7 +137,6 @@ node default {
 
   # COMMON APPS
   include chrome
-  include dropbox
   include iterm2::stable
   include virtualbox
   include tmux

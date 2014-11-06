@@ -80,10 +80,10 @@ also be cloned and setup in `~/src/dabo_act`. Yippee!
 * Hub
 * dnsmasq w/ .dev resolver for localhost
 * rbenv
-* Node.js 0.10
+* Node.js 0.10.31
 * Ruby 1.9.3
-* Ruby 2.0.0 *(set as default)*
-* Ruby 2.1.0
+* Ruby 2.0.0
+* Ruby 2.1.4 *(set as default)*
 * Heroku Toolbelt
 * gcc
 * ack
@@ -143,11 +143,10 @@ example data file at `hiera/common.yaml`. See those files for more details.
 
 ### Mac Apps
 * Chrome
-* Dropbox
 * Google Drive
 * iTerm2
 * Virtualbox
-* Sublime Text 2
+* Sublime Text 3 with Dabo Engineering setup
 * Flowdock
 
 ### Shell setup and Environment variables
