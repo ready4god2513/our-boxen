@@ -66,4 +66,13 @@ class projects::sublime {
       ],
       replace => 'yes'
   }
+
+  file { "$sublime_package_dir/User/Default (OSX).sublime-keymap":
+    content => template('projects/sublime/Default (OSX).sublime-keymap.erb'),
+    require => [
+      Package['Sublime Text'],
+      File["$sublime_package_dir/User"]
+    ],
+    replace => 'yes'
+  }
 }
