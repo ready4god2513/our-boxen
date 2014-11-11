@@ -75,4 +75,13 @@ class projects::sublime {
     ],
     replace => 'yes'
   }
+
+  file { "$sublime_package_dir/User/DashDoc.sublime-settings":
+    content => template('projects/sublime/DashDoc.sublime-settings.erb'),
+    require => [
+      Package['Sublime Text'],
+      File["$sublime_package_dir/User"]
+    ],
+    replace => 'yes'
+  }
 }
