@@ -37,7 +37,7 @@ class projects::sublime {
         Sublime_Text::Package['Solarized Color Scheme'],
         File["$sublime_package_dir/User"]
       ],
-      replace => 'no'
+      replace => 'yes'
   }
 
   file { "$sublime_package_dir/User/Package Control.sublime-settings":
@@ -46,7 +46,7 @@ class projects::sublime {
         Package['Sublime Text'],
         File["$sublime_package_dir/User"]
       ],
-      replace => 'no'
+      replace => 'yes'
   }
 
   file { "$sublime_package_dir/User/SearchInProject.sublime-settings":
@@ -55,7 +55,7 @@ class projects::sublime {
         Package['Sublime Text'],
         File["$sublime_package_dir/User"]
       ],
-      replace => 'no'
+      replace => 'yes'
   }
 
   file { "$sublime_package_dir/User/SublimeLinter.sublime-settings":
@@ -64,6 +64,6 @@ class projects::sublime {
         Package['Sublime Text'],
         File["$sublime_package_dir/User"]
       ],
-      replace => 'no'
+      replace => 'yes'
   }
 }
