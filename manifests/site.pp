@@ -145,6 +145,8 @@ node default {
   include dash
   include alfred
   include sourcetree
+  include tower
+  include clipmenu
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
