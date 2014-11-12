@@ -225,4 +225,10 @@ node default {
       hidden  => true;
   }
 
+  osx_login_item {
+    'Google Drive':
+      name    => 'Google Drive',
+      path    => '/Applications/Google Drive.app',
+      hidden  => true;
+  }
 }
