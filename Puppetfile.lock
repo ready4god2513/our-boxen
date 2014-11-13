@@ -34,6 +34,11 @@ GITHUBTARBALL
     dash (1.0.0)
 
 GITHUBTARBALL
+  remote: boxen/puppet-divvy
+  specs:
+    divvy (1.0.1)
+
+GITHUBTARBALL
   remote: boxen/puppet-dnsmasq
   specs:
     dnsmasq (2.0.0)
@@ -311,6 +316,7 @@ DEPENDENCIES
   cmake (= 1.0.1)
   ctags (= 1.0.0)
   dash (= 1.0.0)
+  divvy (= 1.0.1)
   dnsmasq (= 2.0.0)
   dropbox (= 1.4.1)
   emacs (= 1.1.0)

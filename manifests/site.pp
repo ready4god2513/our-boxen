@@ -147,6 +147,7 @@ node default {
   include sourcetree
   include tower
   include clipmenu
+  include divvy
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
