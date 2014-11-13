@@ -1,0 +1,46 @@
+source /opt/boxen/env.sh
+
+c_reset='\[\e[0m\]'
+c_green='\[\e[0;32m\]'
+c_red='\[\e[0;31m\]'
+c_purple='\[\e[0;35m\]'
+
+PROMPT_COMMAND='PS1="${c_purple}\W${c_reset}$(bash_prompt) :> "'
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+# determines if the git branch you are on is clean or dirty
+git_prompt () {
+  if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    return 0
+  fi
+
+  git_branch=$(Git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+
+  if git diff --quiet 2>/dev/null >&2; then
+    git_color="${c_green}"
+  else
+    git_color=${c_red}
+  fi
+
+  echo " [$git_color$git_branch${c_reset}]"
+}
+
+function bash_prompt() {
+    last_status=$?
+    failure="✘"
+    success="✔"
+
+    if [[ "$last_status" != "0" ]]; then
+        last_status="${c_red}$failure${c_reset}"
+    else
+        last_status="${c_green}$success${c_reset}"
+    fi
+
+    echo "$(git_prompt) $last_status"
+}
+
+# Load git completions
+git_completion_script=~/git-completion.bash
+test -s $git_completion_script && source $git_completion_script
+
+alias ls='ls -Gh'

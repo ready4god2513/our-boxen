@@ -1,7 +1,6 @@
 class projects::dabo_act {
   include heroku
   include virtualbox
-  include projects::sublime
 
   require postgresql
   require phantomjs
