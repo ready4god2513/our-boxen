@@ -89,6 +89,7 @@ node default {
     'push.default.':    value => 'current';
     'difftool.prompt':    value => 'false';
     'grep.linenumber':    value => 'true';
+    'branch.autosetuprebase': value =>  'always';
  }
 
   # node versions
