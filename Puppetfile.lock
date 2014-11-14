@@ -249,11 +249,6 @@ GITHUBTARBALL
     tmux (1.0.2)
 
 GITHUBTARBALL
-  remote: boxen/puppet-tower
-  specs:
-    tower (1.0.0)
-
-GITHUBTARBALL
   remote: boxen/puppet-transmission
   specs:
     transmission (1.1.0)
@@ -363,7 +358,6 @@ DEPENDENCIES
   sudo (= 1.0.0)
   sysctl (= 1.0.1)
   tmux (= 1.0.2)
-  tower (= 1.0.0)
   transmission (= 1.1.0)
   vagrant (= 3.2.0)
   vim (= 1.0.5)

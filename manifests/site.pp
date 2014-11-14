@@ -145,7 +145,6 @@ node default {
   include dash
   include alfred
   include sourcetree
-  include tower
   include clipmenu
   include divvy
 
