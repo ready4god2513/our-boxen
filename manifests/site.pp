@@ -102,6 +102,7 @@ node default {
   ruby::version { '2.1.2': }
   ruby::version { '2.1.3': }
   ruby::version { '2.1.4': }
+  ruby::version { '2.1.5': }
 
   ruby_gem { 'bundler for all rubies':
     gem          => 'bundler',
@@ -179,7 +180,7 @@ node default {
 
   # Keyboard
   class { 'osx::global::key_repeat_rate':
-    rate => 2
+  rate => 2
   }
 
   ## Misc

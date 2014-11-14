@@ -12,7 +12,7 @@ class projects::dabo_act {
       ensure => latest,
   }
 
-  $dabo_ruby_version = '2.1.4'
+  $dabo_ruby_version = '2.1.5'
 
   boxen::project { 'dabo_act':
     redis         => true,
