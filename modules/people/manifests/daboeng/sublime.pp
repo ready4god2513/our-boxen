@@ -1,4 +1,4 @@
-class projects::pairing_sublime {
+class people::daboeng::sublime {
 
   include sublime_text
   include sublime_text::config
@@ -32,7 +32,7 @@ class projects::pairing_sublime {
   }
 
   file { "$sublime_package_dir/User/Preferences.sublime-settings":
-      content => template('projects/pairing_sublime/Preferences.sublime-settings.erb'),
+      content => template('people/daboeng/pairing_sublime/Preferences.sublime-settings.erb'),
       require => [
         Sublime_Text::Package['Solarized Color Scheme'],
         File["$sublime_package_dir/User"]
@@ -41,7 +41,7 @@ class projects::pairing_sublime {
   }
 
   file { "$sublime_package_dir/User/Package Control.sublime-settings":
-      content => template('projects/pairing_sublime/PackageControl.sublime-settings.erb'),
+      content => template('people/daboeng/pairing_sublime/PackageControl.sublime-settings.erb'),
       require => [
         Package['Sublime Text'],
         File["$sublime_package_dir/User"]
@@ -50,7 +50,7 @@ class projects::pairing_sublime {
   }
 
   file { "$sublime_package_dir/User/SearchInProject.sublime-settings":
-      content => template('projects/pairing_sublime/SearchInProject.sublime-settings.erb'),
+      content => template('people/daboeng/pairing_sublime/SearchInProject.sublime-settings.erb'),
       require => [
         Package['Sublime Text'],
         File["$sublime_package_dir/User"]
@@ -59,7 +59,7 @@ class projects::pairing_sublime {
   }
 
   file { "$sublime_package_dir/User/SublimeLinter.sublime-settings":
-      content => template('projects/pairing_sublime/SublimeLinter.sublime-settings.erb'),
+      content => template('people/daboeng/pairing_sublime/SublimeLinter.sublime-settings.erb'),
       require => [
         Package['Sublime Text'],
         File["$sublime_package_dir/User"]
@@ -68,7 +68,7 @@ class projects::pairing_sublime {
   }
 
   file { "$sublime_package_dir/User/Default (OSX).sublime-keymap":
-    content => template('projects/pairing_sublime/Default (OSX).sublime-keymap.erb'),
+    content => template('people/daboeng/pairing_sublime/Default (OSX).sublime-keymap.erb'),
     require => [
       Package['Sublime Text'],
       File["$sublime_package_dir/User"]
@@ -77,7 +77,7 @@ class projects::pairing_sublime {
   }
 
   file { "$sublime_package_dir/User/DashDoc.sublime-settings":
-    content => template('projects/pairing_sublime/DashDoc.sublime-settings.erb'),
+    content => template('people/daboeng/pairing_sublime/DashDoc.sublime-settings.erb'),
     require => [
       Package['Sublime Text'],
       File["$sublime_package_dir/User"]
