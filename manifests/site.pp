@@ -89,6 +89,7 @@ node default {
     'push.default.':    value => 'current';
     'difftool.prompt':    value => 'false';
     'grep.linenumber':    value => 'true';
+    'branch.autosetuprebase': value =>  'always';
  }
 
   # node versions
@@ -219,10 +220,9 @@ node default {
   }
 
   osx_login_item {
-    'Dropbox':
-      name    => 'Dropbox',
-      path    => '/Applications/Dropbox.app',
+    'Google Drive':
+      name    => 'Google Drive',
+      path    => '/Applications/Google Drive.app',
       hidden  => true;
   }
-
 }

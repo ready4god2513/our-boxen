@@ -44,11 +44,6 @@ GITHUBTARBALL
     dnsmasq (2.0.0)
 
 GITHUBTARBALL
-  remote: boxen/puppet-dropbox
-  specs:
-    dropbox (1.4.1)
-
-GITHUBTARBALL
   remote: boxen/puppet-emacs
   specs:
     emacs (1.1.0)
@@ -313,7 +308,6 @@ DEPENDENCIES
   dash (= 1.0.0)
   divvy (= 1.0.1)
   dnsmasq (= 2.0.0)
-  dropbox (= 1.4.1)
   emacs (= 1.1.0)
   flowdock (= 1.0.0)
   flux (= 1.0.1)
