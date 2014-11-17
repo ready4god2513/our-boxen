@@ -225,25 +225,4 @@ node default {
       path    => '/Applications/Google Drive.app',
       hidden  => true;
   }
-
-  osx_login_item {
-    'Flowdock':
-      name    => 'Flowdock',
-      path    => '/Applications/Flowdock.app',
-      hidden  => true;
-  }
-
-  osx_login_item {
-    'iTerm':
-      name    => 'iTerm',
-      path    => '/Applications/iTerm.app',
-      hidden  => true;
-  }
-
-  osx_login_item {
-    'Alfred 2':
-      name    => 'Alfred 2',
-      path    => '/Applications/Alfred 2.app',
-      hidden  => true;
-  }
 }
