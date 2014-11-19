@@ -1,0 +1,142 @@
+#!/bin/bash
+
+# N.b. This program favors early termination (with `exit`) over multiple levels of nested
+# conditionals (i.e. if-then-else expressions). That's why there's very little indendation
+# and many occurances of logical "and" (&&) and "or" (||) operators. Modifications should stick
+# to this style.
+
+# Exit immediately if any line that isn't an expression or a pipeline fails
+set -e
+
+# Enforce the use of git's credential cache - this means that github credentials used for a
+# fetch/push will be cached for 9hrs
+git config --global credential.helper 'cache --timeout=32400'
+# Flush any existing cached credentials because invocation of this script means we are changing
+# github users
+git credential-cache exit
+
+# No args given - show command usage and existing author config
+test $1 || {
+  echo "\
+Set git username(s):
+  git pair   <github-username>
+  git pair <github-username> [and] <github-username>...
+
+Examples:
+
+  $ git pair seanknox
+  $ git pair seanknox rbn1357
+
+Sign out:
+  git pair out"
+  current_user_name=`git config --global user.name`
+  current_user_email=`git config --global user.email`
+
+  echo
+  echo "\
+For this to work you must have filled out the name and email fields in:
+https://github.com/settings/profile"
+
+  test "$current_user_name" && echo && echo "\
+Current name:  $current_user_name"
+  test "$current_user_name" && echo "\
+Current email: $current_user_email"
+  exit
+}
+
+function get_field_from_json {
+  echo "$1" | grep "\"$2\"" | sed "s/  \"$2\": \"\(.*\)\",$/\1/"
+}
+
+function git_config_clear_github_username {
+  git config --global --remove-section github 2>/dev/null || true
+}
+
+function git_config_add_github_username {
+  git_config_clear_github_username
+  while [ $# -gt 0 ]
+  do
+    git config --global --add github.username "$1"
+    shift
+  done
+}
+
+# First arg is "out" - clear existing author config
+test 'out' = $1 && {
+  git config --global --remove-section user
+  git_config_clear_github_username
+  exit
+}
+
+# Given a github username, fetch json-encoded attributes from the public api
+function user_json {
+  local username=$1
+  if [ $SGU_API_KEY ]; then
+    local json=`curl -H "Authorization: token $SGU_API_KEY" -s https://api.github.com/users/$username`
+  else
+    local json=`curl -s https://api.github.com/users/$username`
+  fi
+  test "Not Found" = "$(get_field_from_json "$json" message)" && {
+    echo "Couldn't find $username on GitHub" >&2
+    exit 1
+  }
+  echo "$json"
+}
+
+function join {
+  separator="${1}"
+  shift
+  words=("${@}")
+  regex="$( printf "${separator}%s" "${words[@]}" )"
+  regex="${regex:${#separator}}" # remove leading separator
+  echo "${regex}"
+}
+
+# One arg given - set the git author to one person
+! test $2 && {
+  # Fetch user attribs from github
+  user_json=`user_json $1`
+  # Parse name and email
+  name=`get_field_from_json "$user_json" name`
+  test -z "$name" && name=`get_field_from_json "$user_json" login`
+
+  email=`get_field_from_json "$user_json" email`
+  # Set git author
+  git config --global user.name  "$name"
+  git config --global user.email "$email"
+  git_config_add_github_username $1
+  exit
+}
+
+# More than one arg given - set the git author to a pair
+{
+  # clean "and" from input args
+  argv=("$@")
+  users=`echo "${argv[@]}" | xargs -n1 echo | sed '/^and$/d'`
+
+  #ensure consistent ordering of author names regardless of the order given in the args
+  sorted_usernames=($(printf '%s\n' "${users[@]}"|sort))
+
+  sorted_names=()
+
+  # Fetch user attribs from github and parse them
+  for sorted in "${sorted_usernames[@]}"; do
+    json=`user_json $sorted`
+    name=`get_field_from_json "$json" name`
+    test -z "$name" && name=`get_field_from_json "$json" login`
+
+    sorted_names+=("$name")
+  done
+
+  #Create display name
+  all_names=`join " & " "${sorted_names[@]}"`
+  all_usernames=`join "+" "${sorted_usernames[@]}"`
+
+  # Create email
+  email="pair+$all_usernames@${ORG_DOMAIN:-dabohealth.com}"
+
+  # Set git author
+  git config --global user.name  "$all_names"
+  git config --global user.email "$email"
+  git_config_add_github_username "${sorted_usernames[@]}"
+}
