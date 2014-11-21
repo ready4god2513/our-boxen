@@ -92,6 +92,11 @@ node default {
     'branch.autosetuprebase': value =>  'always';
  }
 
+ file { "${boxen::config::home}/bin/git-pair":
+   source => "puppet:///${boxen::config::home}/repo/manifests/files/git-pair",
+   replace => 'yes'
+ }
+
   # node versions
   nodejs::version { 'v0.10': }
 
