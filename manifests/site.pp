@@ -67,7 +67,6 @@ node default {
     'color.ui': value => 'auto';
     'core.autocrlf': value => 'input';
     'alias.st':    value => 'status';
-    'alias.a':    value => 'add';
     'alias.aa':    value => 'add --all';
     'alias.ci':    value => 'commit';
     'alias.br':    value => 'branch';
@@ -82,7 +81,7 @@ node default {
     'alias.rp':    value => 'remote prune';
     'alias.rpo':    value => 'remote prune origin';
     'alias.pom':  value => 'push origin master';
-    'alias.g':    value => 'grep --break --heading --line-number';
+    'alias.gr':    value => 'grep --break --heading --line-number';
     'alias.rbm':    value => '!git fetch origin master && git rebase origin/master';
     'alias.gpc':    value => 'push --set-upstream origin $(git-branch-current 2> /dev/null)';
     'alias.unstage':    value => 'reset HEAD';
