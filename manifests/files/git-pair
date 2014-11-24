@@ -92,6 +92,12 @@ function join {
   echo "${regex}"
 }
 
+function display_git_authors {
+  c_purple='\x1B[0;35m'
+  c_reset='\x1B[0m'
+  echo -e "Git author[s] have been set to: ${c_purple}`git config --global user.name`${c_reset}"
+}
+
 # One arg given - set the git author to one person
 ! test $2 && {
   # Fetch user attribs from github
@@ -105,6 +111,8 @@ function join {
   git config --global user.name  "$name"
   git config --global user.email "$email"
   git_config_add_github_username $1
+
+  display_git_authors
   exit
 }
 
@@ -139,4 +147,6 @@ function join {
   git config --global user.name  "$all_names"
   git config --global user.email "$email"
   git_config_add_github_username "${sorted_usernames[@]}"
+
+  display_git_authors
 }
