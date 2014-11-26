@@ -26,6 +26,11 @@ class projects::sublime {
     require => Package['Sublime Text']
   }
 
+  sublime_text::package { 'Seti_UI':
+    source  => 'ctf0/Seti_ST3',
+    require => Package['Sublime Text']
+  }
+
   sublime_text::package { 'Package Control':
     source  => 'wbond/sublime_package_control',
     require => Package['Sublime Text']
