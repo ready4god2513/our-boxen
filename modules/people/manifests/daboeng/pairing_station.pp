@@ -1,5 +1,4 @@
 class people::daboeng::pairing_station {
-  include people::daboeng::sublime
 
   file { "/Users/${::boxen_user}/.profile":
     content => template('people/daboeng/pairing_shell/.profile.erb'),
