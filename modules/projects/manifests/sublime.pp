@@ -46,7 +46,7 @@ class projects::sublime {
   }
 
   file { "$sublime_package_dir/User/Package Control.sublime-settings":
-      content => template('projects/sublime/PackageControl.sublime-settings.erb'),
+      content => template('projects/sublime/Package Control.sublime-settings.erb'),
       require => [
         Package['Sublime Text'],
         File["$sublime_package_dir/User"]
