@@ -31,8 +31,9 @@ class projects::sublime {
     require => Package['Sublime Text']
   }
 
-  sublime_text::package { 'Package Control':
+  repository { "$sublime_package_dir/Package Control":
     source  => 'wbond/sublime_package_control',
+    ensure  => '6a8b91ca58d66cb495b383d9572bb801316bcec5',
     require => Package['Sublime Text']
   }
 
