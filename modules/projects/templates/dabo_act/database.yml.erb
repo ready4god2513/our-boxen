@@ -15,3 +15,12 @@ test:
   host: localhost
   username: <%= scope.lookupvar('::boxen_user') %>
 
+acceptance:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  <<: *default
+
