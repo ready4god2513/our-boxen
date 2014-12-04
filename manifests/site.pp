@@ -154,6 +154,7 @@ node default {
   include sourcetree
   include clipmenu
   include divvy
+  include heroku
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
