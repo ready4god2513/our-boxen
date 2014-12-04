@@ -1,5 +1,7 @@
 class people::daboeng::pairing_station {
 
+  include flux::beta
+
   file { "/Users/${::boxen_user}/.profile":
     content => template('people/daboeng/pairing_shell/.profile.erb'),
     replace => 'yes'

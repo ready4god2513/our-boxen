@@ -316,6 +316,7 @@ DEPENDENCIES
   emacs (= 1.1.0)
   flowdock (= 1.0.0)
   flux (= 1.0.1)
+  flux (= 1.0.1)
   foreman (= 1.2.0)
   gcc (= 2.2.0)
   git (= 2.7.0)
