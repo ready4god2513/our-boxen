@@ -73,7 +73,7 @@ node default {
     'alias.co':    value => 'checkout';
     'alias.df':    value => 'diff';
     'alias.pr':    value => 'pull --rebase';
-    'alias.lg':    value => "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)an>%Creset' --abbrev-commit";
+    'alias.lg':    value => "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)>%Creset' --abbrev-commit";
     'alias.hist':  value => "log --pretty=format:'%Cgreen%h%Creset %Cblue%ad%Creset %C(magenta)%cn%Creset%C(yellow)%d%Creset%n        %s' --graph --date=local";
     'alias.lol':    value => 'log --graph --decorate --pretty=oneline --abbrev-commit';
     'alias.ls':    value => 'ls-files';
