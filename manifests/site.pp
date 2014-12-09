@@ -231,4 +231,11 @@ node default {
       path    => '/Applications/Google Drive.app',
       hidden  => true;
   }
+
+  osx_login_item {
+    'Divvy':
+      name    => 'Divvy',
+      path    => '/Applications/Divvy.app',
+      hidden  => true;
+  }
 }
