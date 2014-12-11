@@ -25,6 +25,16 @@ git_prompt () {
   echo " [$git_color$git_branch${c_reset}]"
 }
 
+function show_git_author_initials {
+  if git config --global user.initials > /dev/null; then
+    initials=`git config --global user.initials`
+  else
+    initials="${c_red}RUN GIT PAIR! Git Author Not Set${c_reset}"
+  fi
+
+  echo "($initials)"
+}
+
 function bash_prompt() {
     last_status=$?
     failure="✘"
@@ -36,7 +46,7 @@ function bash_prompt() {
         last_status="${c_green}$success${c_reset}"
     fi
 
-    echo "$(git_prompt) $last_status"
+    echo "$(git_prompt) $(show_git_author_initials) $last_status"
 }
 
 # Load git completions

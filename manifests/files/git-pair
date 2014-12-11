@@ -1,4 +1,5 @@
 #!/bin/bash
+# v1.1.0
 
 # N.b. This program favors early termination (with `exit`) over multiple levels of nested
 # conditionals (i.e. if-then-else expressions). That's why there's very little indendation
@@ -7,13 +8,6 @@
 
 # Exit immediately if any line that isn't an expression or a pipeline fails
 set -e
-
-# Enforce the use of git's credential cache - this means that github credentials used for a
-# fetch/push will be cached for 9hrs
-git config --global credential.helper 'cache --timeout=32400'
-# Flush any existing cached credentials because invocation of this script means we are changing
-# github users
-git credential-cache exit
 
 # No args given - show command usage and existing author config
 test $1 || {
@@ -63,9 +57,14 @@ function git_config_add_github_username {
 
 # First arg is "out" - clear existing author config
 test 'out' = $1 && {
-  git config --global --remove-section user
-  git_config_clear_github_username
-  exit
+  if git config --global user.name > /dev/null; then
+    git config --global --remove-section user
+    git_config_clear_github_username
+    exit
+  else
+    exit 0
+  fi
+
 }
 
 # Given a github username, fetch json-encoded attributes from the public api
@@ -98,18 +97,49 @@ function display_git_authors {
   echo -e "Git author[s] have been set to: ${c_purple}`git config --global user.name`${c_reset}"
 }
 
+function flush_credential_cache {
+  # Enforce the use of git's credential cache - this means that github credentials used for a
+  # fetch/push will be cached for 9hrs
+  git config --global credential.helper 'cache --timeout=32400'
+  # Flush any existing cached credentials because invocation of this script means we are changing
+  # github users
+  git credential-cache exit
+}
+
+function unset_local_gitconfig_author {
+  if git config --local user.name > /dev/null; then
+    git config --remove-section user
+  fi
+}
+
+function convert_name_to_initials {
+  initials=()
+  for name in $1; do
+      local initial=`echo $name | cut -c 1`
+      initials+=("$initial")
+  done
+  initials=`join "" "${initials[@]}"`
+  echo "${initials}"
+}
+
 # One arg given - set the git author to one person
 ! test $2 && {
+  flush_credential_cache
+  unset_local_gitconfig_author
+
   # Fetch user attribs from github
   user_json=`user_json $1`
   # Parse name and email
   name=`get_field_from_json "$user_json" name`
   test -z "$name" && name=`get_field_from_json "$user_json" login`
 
+  initials=`convert_name_to_initials "$name"`
+
   email=`get_field_from_json "$user_json" email`
   # Set git author
   git config --global user.name  "$name"
   git config --global user.email "$email"
+  git config --global user.initials "$initials"
   git_config_add_github_username $1
 
   display_git_authors
@@ -118,6 +148,9 @@ function display_git_authors {
 
 # More than one arg given - set the git author to a pair
 {
+  flush_credential_cache
+  unset_local_gitconfig_author
+
   # clean "and" from input args
   argv=("$@")
   users=`echo "${argv[@]}" | xargs -n1 echo | sed '/^and$/d'`
@@ -126,6 +159,7 @@ function display_git_authors {
   sorted_usernames=($(printf '%s\n' "${users[@]}"|sort))
 
   sorted_names=()
+  sorted_initials=()
 
   # Fetch user attribs from github and parse them
   for sorted in "${sorted_usernames[@]}"; do
@@ -133,12 +167,16 @@ function display_git_authors {
     name=`get_field_from_json "$json" name`
     test -z "$name" && name=`get_field_from_json "$json" login`
 
+    initials=`convert_name_to_initials "$name"`
+
     sorted_names+=("$name")
+    sorted_initials+=("$initials")
   done
 
   #Create display name
   all_names=`join " & " "${sorted_names[@]}"`
   all_usernames=`join "+" "${sorted_usernames[@]}"`
+  all_initials=`join " " "${sorted_initials[@]}"`
 
   # Create email
   email="pair+$all_usernames@${ORG_DOMAIN:-dabohealth.com}"
@@ -146,6 +184,7 @@ function display_git_authors {
   # Set git author
   git config --global user.name  "$all_names"
   git config --global user.email "$email"
+  git config --global user.initials "$all_initials"
   git_config_add_github_username "${sorted_usernames[@]}"
 
   display_git_authors
