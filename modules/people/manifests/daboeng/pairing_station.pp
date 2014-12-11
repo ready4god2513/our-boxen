@@ -13,13 +13,6 @@ class people::daboeng::pairing_station {
   }
 
   osx_login_item {
-    'Flowdock':
-      name    => 'Flowdock',
-      path    => '/Applications/Flowdock.app',
-      hidden  => false;
-  }
-
-  osx_login_item {
     'iTerm':
       name    => 'iTerm',
       path    => '/Applications/iTerm.app',
