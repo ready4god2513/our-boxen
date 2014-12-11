@@ -1,4 +1,3 @@
-# This file manages Puppet module dependencies.
 #
 # It works a lot like Bundler. We provide some core modules by
 # default. This ensures at least the ability to construct a basic

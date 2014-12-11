@@ -238,4 +238,11 @@ node default {
       path    => '/Applications/Divvy.app',
       hidden  => true;
   }
+
+  osx_login_item {
+    'ClipMenu':
+      name    => 'ClipMenu',
+      path    => '/Applications/ClipMenu.app',
+      hidden  => true;
+  }
 }
