@@ -50,7 +50,7 @@ To give you a brief overview, we're going to:
 
 * Install dependencies
 * Bootstrap your box to use dabo-boxen
-* Setup your system with all the tools and software you need to run [dabo_act](https://github.com/dabohealth/dabo_act)
+* Setup your system with all the tools and software you need to run [mayo_act](https://github.com/dabohealth/mayo_act)
 
 ## Boxenify me
 
@@ -69,8 +69,8 @@ script/boxen all
 
 Boxen will run for awhile, depending on the speed of your computer. After it
 finishes, your provisioning is now complete. Open a new terminal window to
-reinitialize your shell and start using your system. The `dabo_act` project will
-also be cloned and setup in `~/src/dabo_act`. Yippee!
+reinitialize your shell and start using your system. The `mayo_act` project will
+also be cloned and setup in `~/src/mayo_act`. Yippee!
 
 ## What You Get
 
@@ -119,7 +119,7 @@ boxen repo (ex. /path/to/your-boxen/Puppetfile):
 
 * tmux
 includes the Java module from Github using the tag "1.6.0" from the github repository
-* The [dabo_act](https://github.com/dabohealth/dabo_act) application (almost) completely configured and ready to run.
+* The [mayo_act](https://github.com/dabohealth/mayo_act) application (almost) completely configured and ready to run.
 and takes the name of the module, the version, and optional repo location:
 
     def github(name, version, options = nil)
@@ -182,29 +182,29 @@ example one here [here](https://github.com/boxen/our-boxen/blob/master/modules/p
 ### Updating Boxen
 Whenever Boxen is run, it will automatically attempt to fetch
 the latest version from the [dabohealth/dabo-boxen](https://github.com/dabohealth/dabo-boxen) repo.
-Thus, you can ensure you have an up to date system and `dabo_act` application setup by simply running:
+Thus, you can ensure you have an up to date system and `mayo_act` application setup by simply running:
 ```
 boxen all
 ```
 
-*The 'all' parameter is important—it tells Boxen to install all additional projects (including dabo_act) along with the global configuration.*
+*The 'all' parameter is important—it tells Boxen to install all additional projects (including mayo_act) along with the global configuration.*
 
-## Boxen and the dabo_act project
+## Boxen and the mayo_act project
 
-After running Boxen the first time, [dabo_act](https://github.com/dabohealth/dabo_act) will be cloned and setup for you.
+After running Boxen the first time, [mayo_act](https://github.com/dabohealth/mayo_act) will be cloned and setup for you.
 
-Any time you run `boxen all` or `boxen dabo_act`, Boxen will ensure the following is done or already done:
+Any time you run `boxen all` or `boxen mayo_act`, Boxen will ensure the following is done or already done:
 
-* Clone the  [dabo_act](https://github.com/dabohealth/dabo_act)  repo
+* Clone the  [mayo_act](https://github.com/dabohealth/mayo_act)  repo
 * Ensure Redis, Postgresql, PhantomJS are all installed and running
 * Install Heroku command line tools
 * Prepare default config/database.yml
 * Prepare default .env
 * Install project version of Ruby and automatically run `bundle install`
 * Run migrations and load seed data and sample data
-* Prepare databases for parallel tests *(see [https://github.com/dabohealth/dabo_act#testing](https://github.com/dabohealth/dabo_act#testing) for more info)*
+* Prepare databases for parallel tests *(see [https://github.com/dabohealth/mayo_act#testing](https://github.com/dabohealth/mayo_act#testing) for more info)*
 * Install Mailcatcher gem
-* Setup nginx/dnsmasq to allow accessing the development server at `http://dabo_act.dev/`
+* Setup nginx/dnsmasq to allow accessing the development server at `http://mayo_act.dev/`
 
 At this point you can start the app. You'll need to manually add your AWS credentials to .env. Ask a dev lead on how to do this.
 
