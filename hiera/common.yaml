@@ -20,3 +20,6 @@ ruby::version::env:
   Darwin:
     CFLAGS:   "-I%{::homebrew::config::installdir}/include -march=core2 -O3"
     LDFLAGS:  "-L%{::homebrew::config::installdir}/lib"
+
+git::credentialhelper: false
+git::global_credentialhelper: false

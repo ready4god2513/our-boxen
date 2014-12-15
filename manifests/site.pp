@@ -34,17 +34,6 @@ Package {
   require  => Class['homebrew']
 }
 
-Repository {
-  provider => git,
-  extra    => [
-    '--recurse-submodules'
-  ],
-  require  => File["${boxen::config::bindir}/boxen-git-credential"],
-  config   => {
-    'credential.helper' => "${boxen::config::bindir}/boxen-git-credential"
-  }
-}
-
 Service {
   provider => ghlaunchd
 }
@@ -89,6 +78,7 @@ node default {
     'difftool.prompt':    value => 'false';
     'grep.linenumber':    value => 'true';
     'branch.autosetuprebase': value =>  'always';
+    'credential.helper':      value => 'cache --timeout=32400'
  }
 
  file { "${boxen::config::home}/bin/git-pair":
