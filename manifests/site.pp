@@ -91,10 +91,10 @@ node default {
     'branch.autosetuprebase': value =>  'always';
  }
 
- file { "${boxen::config::home}/bin/git-pair":
+  file { "${boxen::config::home}/bin/git-pair":
    source => "puppet:///${boxen::config::home}/repo/manifests/files/git-pair",
    replace => 'yes'
- }
+  }
 
   # node versions
   nodejs::version { 'v0.10': }
@@ -153,8 +153,14 @@ node default {
   include alfred
   include sourcetree
   include clipmenu
-  include divvy
   include heroku
+  include spectacle
+
+  file { "/Users/${::boxen_user}/Library/Preferences/com.divisiblebyzero.Spectacle.plist":
+    source => "puppet:///${boxen::config::home}/repo/manifests/files/com.divisiblebyzero.Spectacle.plist",
+    replace => 'yes',
+    require => Class['spectacle']
+  }
 
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
@@ -233,9 +239,9 @@ node default {
   }
 
   osx_login_item {
-    'Divvy':
-      name    => 'Divvy',
-      path    => '/Applications/Divvy.app',
+    'spectacle':
+      name    => 'spectacle',
+      path    => '/Applications/Spectacle.app',
       hidden  => true;
   }
 

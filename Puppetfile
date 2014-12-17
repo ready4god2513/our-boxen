@@ -96,7 +96,7 @@ github "flowdock",          "1.0.0"
 github "googledrive",       "1.0.2"
 github "dash",              "1.0.0"
 github "clipmenu",          "1.0.0"
-github "divvy",             "1.0.1"
+github "spectacle",         "1.0.0"
 
 # Apps: Users
 github "kindle",            "1.0.1"
