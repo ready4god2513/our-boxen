@@ -1,5 +1,5 @@
 #!/bin/bash
-# v1.1.0
+# v1.2.0
 
 # N.b. This program favors early termination (with `exit`) over multiple levels of nested
 # conditionals (i.e. if-then-else expressions). That's why there's very little indendation
@@ -8,35 +8,6 @@
 
 # Exit immediately if any line that isn't an expression or a pipeline fails
 set -e
-
-# No args given - show command usage and existing author config
-test $1 || {
-  echo "\
-Set git username(s):
-  git pair   <github-username>
-  git pair <github-username> [and] <github-username>...
-
-Examples:
-
-  $ git pair seanknox
-  $ git pair seanknox rbn1357
-
-Sign out:
-  git pair out"
-  current_user_name=`git config --global user.name`
-  current_user_email=`git config --global user.email`
-
-  echo
-  echo "\
-For this to work you must have filled out the name and email fields in:
-https://github.com/settings/profile"
-
-  test "$current_user_name" && echo && echo "\
-Current name:  $current_user_name"
-  test "$current_user_name" && echo "\
-Current email: $current_user_email"
-  exit
-}
 
 function get_field_from_json {
   echo "$1" | grep "\"$2\"" | sed "s/  \"$2\": \"\(.*\)\",$/\1/"
@@ -55,16 +26,22 @@ function git_config_add_github_username {
   done
 }
 
-# First arg is "out" - clear existing author config
-test 'out' = $1 && {
-  if git config --global user.name > /dev/null; then
-    git config --global --remove-section user
-    git_config_clear_github_username
-    exit
-  else
-    exit 0
-  fi
+function clear_github_user_info {
+  git config --global --remove-section user
+  git_config_clear_github_username
+}
 
+function flush_credential_cache {
+  # Enforce the use of git's credential cache - this means that github credentials used for a
+  # fetch/push will be cached for 9hrs
+  git config --global credential.helper 'cache --timeout=32400'
+  # Flush any existing cached credentials because invocation of this script means we are changing
+  # github users
+  git credential-cache exit
+}
+
+function remove_hub_credential_file {
+  if [ -e ~/.config/hub ]; then rm ~/.config/hub; fi
 }
 
 # Given a github username, fetch json-encoded attributes from the public api
@@ -97,15 +74,6 @@ function display_git_authors {
   echo -e "Git author[s] have been set to: ${c_purple}`git config --global user.name`${c_reset}"
 }
 
-function flush_credential_cache {
-  # Enforce the use of git's credential cache - this means that github credentials used for a
-  # fetch/push will be cached for 9hrs
-  git config --global credential.helper 'cache --timeout=32400'
-  # Flush any existing cached credentials because invocation of this script means we are changing
-  # github users
-  git credential-cache exit
-}
-
 function unset_local_gitconfig_author {
   if git config --local user.name > /dev/null; then
     git config --remove-section user
@@ -122,10 +90,54 @@ function convert_name_to_initials {
   echo "${initials}"
 }
 
+# First arg is "out" - clear existing author config
+test 'out' = $1 && {
+  # Always remove the hub crendential file
+  remove_hub_credential_file
+  flush_credential_cache
+
+  if git config --global user.name > /dev/null; then
+    clear_github_user_info
+    exit
+  else
+    exit 0
+  fi
+}
+
+# No args given - show command usage and existing author config
+test $1 || {
+  echo "\
+Set git username(s):
+  git pair   <github-username>
+  git pair <github-username> [and] <github-username>...
+
+Examples:
+
+  $ git pair seanknox
+  $ git pair seanknox ryanswood
+
+Sign out:
+  git pair out"
+  current_user_name=`git config --global user.name`
+  current_user_email=`git config --global user.email`
+
+  echo
+  echo "\
+For this to work you must have filled out the name and email fields in:
+https://github.com/settings/profile"
+
+  test "$current_user_name" && echo && echo "\
+Current name:  $current_user_name"
+  test "$current_user_name" && echo "\
+Current email: $current_user_email"
+  exit
+}
+
 # One arg given - set the git author to one person
 ! test $2 && {
   flush_credential_cache
   unset_local_gitconfig_author
+  remove_hub_credential_file
 
   # Fetch user attribs from github
   user_json=`user_json $1`
@@ -150,6 +162,7 @@ function convert_name_to_initials {
 {
   flush_credential_cache
   unset_local_gitconfig_author
+  remove_hub_credential_file
 
   # clean "and" from input args
   argv=("$@")
