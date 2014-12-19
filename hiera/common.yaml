@@ -20,3 +20,7 @@ ruby::version::env:
   Darwin:
     CFLAGS:   "-I%{::homebrew::config::installdir}/include -march=core2 -O3"
     LDFLAGS:  "-L%{::homebrew::config::installdir}/lib"
+
+
+nodejs::version::alias:
+  'v0.10': 'v0.10.34'
