@@ -60,7 +60,7 @@ class projects::comparitron {
   }
 
   ## ensure pg_stat_statements is loaded (needed for Heroku DB dumps)
-  exec { 'psql CREATE EXTENSION pg_stat_statements':
+  exec { 'psql CREATE EXTENSION pg_stat_statements comparitron':
     provider  => 'shell',
     command   => "psql -p${postgresql::port} comparitron_development -c 'CREATE EXTENSION pg_stat_statements;'",
     require   => [

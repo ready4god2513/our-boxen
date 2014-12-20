@@ -117,7 +117,7 @@ class projects::mayo_act {
   }
 
   ## ensure pg_stat_statements is loaded (needed for Heroku DB dumps)
-  exec { 'psql CREATE EXTENSION pg_stat_statements':
+  exec { 'psql CREATE EXTENSION pg_stat_statements mayo_act':
     provider  => 'shell',
     command   => "psql -p${postgresql::port} mayo_act_development -c 'CREATE EXTENSION pg_stat_statements;'",
     require   => [
