@@ -90,4 +90,22 @@ class projects::sublime {
     ],
     replace => 'yes'
   }
+
+  file { "$sublime_package_dir/User/bindingpry.sublime-snippet":
+    content => template('projects/sublime/bindingpry.sublime-snippet.erb'),
+    ensure => present,
+    require => [
+      Package['Sublime Text'],
+      File["$sublime_package_dir/User"]
+    ]
+  }
+
+  file { "$sublime_package_dir/User/consolelog.sublime-snippet":
+    content => template('projects/sublime/consolelog.sublime-snippet.erb'),
+    ensure => present,
+    require => [
+      Package['Sublime Text'],
+      File["$sublime_package_dir/User"]
+    ]
+  }
 }
