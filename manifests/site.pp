@@ -142,7 +142,6 @@ node default {
   }
 
   # COMMON APPS
-  include java
   include chrome
   include iterm2::stable
   include virtualbox

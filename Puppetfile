@@ -74,7 +74,6 @@ github "cmake",             "1.0.1"
 github "protobuf",          "1.0.0"
 github "ctags",             "1.0.0"
 github "mysql",             "1.99.9"
-github "java",              "1.7.1"
 
 # Apps: All
 github "iterm2",            "1.2.2"
