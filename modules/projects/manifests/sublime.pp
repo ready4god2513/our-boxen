@@ -31,6 +31,11 @@ class projects::sublime {
     require => Package['Sublime Text']
   }
 
+  sublime_text::package { 'SublimeLinter':
+    source  => 'SublimeLinter/SublimeLinter3',
+    require => Package['Sublime Text']
+  }
+
   repository { "$sublime_package_dir/Package Control":
     source  => 'wbond/sublime_package_control',
     ensure  => '6a8b91ca58d66cb495b383d9572bb801316bcec5',

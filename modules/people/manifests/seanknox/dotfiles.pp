@@ -3,10 +3,10 @@ class people::seanknox::dotfiles {
   $home = $people::seanknox::home
   $dotfiles = $people::seanknox::dotfiles
 
-  file { "${home}/.gitconfig":
-    target  => "${dotfiles}/gitconfig",
-    require => Repository["$dotfiles"]
-  }
+  # file { "${home}/.gitconfig":
+  #   target  => "${dotfiles}/gitconfig",
+  #   require => Repository["$dotfiles"]
+  # }
 
   file { "${home}/.bash_profile":
     target  => "${dotfiles}/bash_profile",
