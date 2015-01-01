@@ -1,26 +1,26 @@
-class projects::comparitron {
+class projects::iris {
   include heroku
 
   require postgresql
 
   $dabo_ruby_version = '2.1.5'
 
-  boxen::project { 'comparitron':
+  boxen::project { 'iris':
     postgresql    => true,
     ruby          => $dabo_ruby_version,
     nginx         => true,
-    source        => 'dabohealth/comparitron'
+    source        => 'dabohealth/iris'
   }
 
-  file { "${boxen::config::srcdir}/comparitron/config/database.yml":
-      content => template('projects/comparitron/database.yml.erb'),
-      require => Repository["${boxen::config::srcdir}/comparitron"],
+  file { "${boxen::config::srcdir}/iris/config/database.yml":
+      content => template('projects/iris/database.yml.erb'),
+      require => Repository["${boxen::config::srcdir}/iris"],
       replace => 'yes'
   }
 
-  file { "${boxen::config::srcdir}/comparitron/.env":
-      content => template('projects/comparitron/env.erb'),
-      require => Repository["${boxen::config::srcdir}/comparitron"],
+  file { "${boxen::config::srcdir}/iris/.env":
+      content => template('projects/iris/env.erb'),
+      require => Repository["${boxen::config::srcdir}/iris"],
       replace => 'no'
   }
 
@@ -36,10 +36,10 @@ class projects::comparitron {
   ## command => "${bundle} install'"
 
   ## bundle install
-  exec { 'bundle install comparitron':
+  exec { 'bundle install iris':
     provider  => 'shell',
     command   => "${bundle} install'",
-    cwd       => "${boxen::config::srcdir}/comparitron",
+    cwd       => "${boxen::config::srcdir}/iris",
     require   => [
       Ruby[$dabo_ruby_version],
       Ruby_Gem["bundler for all rubies"],
@@ -50,31 +50,31 @@ class projects::comparitron {
   }
 
   ## rake db:setup
-  exec { 'rake db:setup comparitron':
+  exec { 'rake db:setup iris':
     provider  => 'shell',
     command   => "${bundle} exec rake db:setup'",
-    cwd       => "${boxen::config::srcdir}/comparitron",
+    cwd       => "${boxen::config::srcdir}/iris",
     require   => [
-      Exec['bundle install comparitron']
+      Exec['bundle install iris']
     ]
   }
 
   ## ensure pg_stat_statements is loaded (needed for Heroku DB dumps)
-  exec { 'psql CREATE EXTENSION pg_stat_statements comparitron':
+  exec { 'psql CREATE EXTENSION pg_stat_statements iris':
     provider  => 'shell',
-    command   => "psql -p${postgresql::port} comparitron_development -c 'CREATE EXTENSION pg_stat_statements;'",
+    command   => "psql -p${postgresql::port} iris_development -c 'CREATE EXTENSION pg_stat_statements;'",
     require   => [
-      Postgresql::Db['comparitron_development']
+      Postgresql::Db['iris_development']
     ],
-    unless    => ["psql -p${postgresql::port} comparitron_development -c '\\dx' | cut -d \\| -f1 | grep -w pg_stat_statements"]
+    unless    => ["psql -p${postgresql::port} iris_development -c '\\dx' | cut -d \\| -f1 | grep -w pg_stat_statements"]
   }
 
-  exec { 'pre-commit install comparitron':
+  exec { 'pre-commit install iris':
     provider      => 'shell',
     command   => "${bundle} exec pre-commit install'",
-    cwd             => "${boxen::config::srcdir}/comparitron",
+    cwd             => "${boxen::config::srcdir}/iris",
     require => [
-      Exec['bundle install comparitron']
+      Exec['bundle install iris']
     ]
   }
 }
