@@ -3,7 +3,7 @@ class projects::iris {
 
   require postgresql
 
-  $dabo_ruby_version = '2.1.5'
+  $dabo_ruby_version = '2.2.0'
 
   boxen::project { 'iris':
     postgresql    => true,
