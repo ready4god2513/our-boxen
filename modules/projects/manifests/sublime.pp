@@ -31,6 +31,16 @@ class projects::sublime {
     require => Package['Sublime Text']
   }
 
+  sublime_text::package { 'Soda Color Theme':
+    source  => 'buymeasoda/soda-theme',
+    require => Package['Sublime Text']
+  }
+
+  sublime_text::package { 'Tomorrow Color Schemes':
+    source  => 'theymaybecoders/sublime-tomorrow-theme',
+    require => Package['Sublime Text']
+  }
+
   sublime_text::package { 'SublimeLinter':
     source  => 'SublimeLinter/SublimeLinter3',
     require => Package['Sublime Text']
