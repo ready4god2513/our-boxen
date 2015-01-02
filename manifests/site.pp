@@ -92,9 +92,22 @@ node default {
  }
 
   file { "${boxen::config::home}/bin/git-pair":
-   source => "puppet:///${boxen::config::home}/repo/manifests/files/git-pair",
-   replace => 'yes'
+    source => "puppet:///${boxen::config::home}/repo/manifests/files/git-pair",
+    replace => 'yes'
   }
+
+  exec { "Eliminate untrustworthy CNNIC CA":
+    command => "/usr/bin/security delete-certificate -Z 8BAF4C9B1DF02A92F7DA128EB91BACF498604B6F /System/Library/Keychains/SystemRootCertificates.keychain",
+    onlyif  => "/usr/bin/security find-certificate -c CNNIC /System/Library/Keychains/SystemRootCertificates.keychain",
+    user    => root
+  }
+
+  exec { "Eliminate untrustworthy China Internet Network Information Center CA":
+    command => "/usr/bin/security delete-certificate -Z 4F99AA93FB2BD13726A1994ACE7FF005F2935D1E /System/Library/Keychains/SystemRootCertificates.keychain",
+    onlyif  => "/usr/bin/security find-certificate -c 'China Internet Network Information Center EV' /System/Library/Keychains/SystemRootCertificates.keychain",
+    user    => root
+  }
+
 
   # node versions
   nodejs::version { 'v0.10': }
