@@ -12,12 +12,6 @@ class projects::iris {
     source        => 'dabohealth/iris'
   }
 
-  file { "${boxen::config::srcdir}/iris/config/database.yml":
-      content => template('projects/iris/database.yml.erb'),
-      require => Repository["${boxen::config::srcdir}/iris"],
-      replace => 'yes'
-  }
-
   file { "${boxen::config::srcdir}/iris/.env":
       content => template('projects/iris/env.erb'),
       require => Repository["${boxen::config::srcdir}/iris"],
