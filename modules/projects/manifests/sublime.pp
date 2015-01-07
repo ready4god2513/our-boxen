@@ -123,4 +123,8 @@ class projects::sublime {
       File["$sublime_package_dir/User"]
     ]
   }
+
+  boxen::env_script { "bundler_editor_sublime":
+    content => template('projects/sublime/bundler_editor.sh')
+  }
 }
