@@ -1,0 +1,5 @@
+#!/bin/sh
+
+osascript -e 'quit app "CHROME"'
+rm -rf /Users/daboeng/Library/Application\ Support/Google/Chrome/Default/Cookies*
+rm -rf /Users/daboeng/Library/Application\ Support/Google/Chrome/Default/Application\ Cache
