@@ -12,6 +12,11 @@ class people::daboeng::pairing_station {
     replace => 'yes'
   }
 
+  exec { "Wake computer at 3 a.m. to run clearchrome daemon":
+    command => "pmset repeat wakeorpoweron MTWRF 3:00:00",
+    user    => root
+  }
+
   osx_login_item {
     'iTerm':
       name    => 'iTerm',
