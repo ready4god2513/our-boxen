@@ -175,6 +175,12 @@ node default {
     require => Class['spectacle']
   }
 
+  file { "/Users/${::boxen_user}/Library/Preferences/com.naotaka.ClipMenu.plist":
+    source => "puppet:///${boxen::config::home}/repo/manifests/files/com.naotaka.ClipMenu.plist",
+    replace => 'yes',
+    require => Class['clipmenu']
+  }
+
   # OS X CONFIG
   osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
   # Download and enable software updates
@@ -206,7 +212,7 @@ node default {
 
   # Keyboard
   class { 'osx::global::key_repeat_rate':
-  rate => 2
+    rate => 2
   }
 
   ## Misc
