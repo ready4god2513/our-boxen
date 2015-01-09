@@ -63,11 +63,11 @@ class projects::iris {
     unless    => ["psql -p${postgresql::port} iris_development -c '\\dx' | cut -d \\| -f1 | grep -w pg_stat_statements"]
   }
 
-  exec { 'pre-commit install iris':
-    provider      => 'shell',
-    command   => "${bundle} exec pre-commit install'",
-    cwd             => "${boxen::config::srcdir}/iris",
-    require => [
+  exec { 'overcommit install iris':
+    provider  => 'shell',
+    command   => "${bundle} exec overcommit --install --force && rm .git/hooks/post-checkout .git/hooks/commit-msg'",
+    cwd       => "${boxen::config::srcdir}/iris",
+    require   => [
       Exec['bundle install iris']
     ]
   }
