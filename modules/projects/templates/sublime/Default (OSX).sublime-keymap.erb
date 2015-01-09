@@ -5,5 +5,19 @@
   { "keys": ["super+alt+b"], "command": "blame" },
   { "keys": ["super+shift+r"], "command": "reveal_in_side_bar"},
   { "keys": ["alt+d"], "command": "goto_definition" },
-  { "keys": ["super+ctrl+f"], "command": "copy_path" }
+  { "keys": ["super+ctrl+f"], "command": "copy_path" },
+
+  //
+  // Vintageous Settings
+  //
+
+  // a better ctrl+[ for esc
+  {"keys": ["ctrl+["], "command": "press_key", "args": {"key": "<esc>"}, "context": [{"key": "vi_command_mode_aware"}]},
+  {"keys": ["ctrl+["], "command": "_enter_normal_mode",   "args": {"mode": "mode_insert"},  "context": [{"key": "vi_insert_mode_aware"}]},
+
+  // visual block should be shift g
+  {"keys": ["shift+ctrl+v"], "command": "press_key", "args": {"key": "<C-v>"}, "context": [{"key": "vi_command_mode_aware"}, {"key": "vi_use_ctrl_keys"}]},
+
+  // redo should be shift r
+  {"keys": ["shift+ctrl+r"], "command": "press_key", "args": {"key": "<C-r>"}, "context": [{"key": "vi_command_mode_aware"}, {"key": "vi_use_ctrl_keys"}]},
 ]
