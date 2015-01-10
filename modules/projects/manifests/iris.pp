@@ -22,8 +22,9 @@ class projects::iris {
   ## rbenv-installed gems cannot be run in the boxen installation environment
   ## which uses the system ruby. The environment must be cleared (env -i)
   ## so an installed ruby (and gems) can be used in a new shell.
+  ## env -i also clears out SHELL, so it must be defined when running commands.
 
-  $bundle = "env -i zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${dabo_ruby_version} bundle"
+  $bundle = "env -i SHELL=/bin/bash /bin/bash -c 'source /opt/boxen/env.sh && RBENV_VERSION=${dabo_ruby_version} bundle"
 
   ## NOTE: don't forget the trailing single quote in the command!
   ## e.g.
