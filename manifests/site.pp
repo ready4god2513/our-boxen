@@ -108,7 +108,6 @@ node default {
     user    => root
   }
 
-
   # node versions
   nodejs::version { 'v0.10': }
 
