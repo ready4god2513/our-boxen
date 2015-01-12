@@ -12,10 +12,6 @@ class projects::sublime {
     ]
   }
 
-  nodejs::module { 'jshint':
-    node_version => 'v0.10'
-  }
-
   sublime_text::package { 'Solarized Color Scheme':
     source  => 'SublimeColors/Solarized',
     require => Package['Sublime Text']
