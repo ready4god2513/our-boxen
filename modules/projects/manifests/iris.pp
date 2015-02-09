@@ -54,16 +54,6 @@ class projects::iris {
     ]
   }
 
-  ## ensure pg_stat_statements is loaded (needed for Heroku DB dumps)
-  exec { 'psql CREATE EXTENSION pg_stat_statements iris':
-    provider  => 'shell',
-    command   => "psql -p${postgresql::port} iris_development -c 'CREATE EXTENSION pg_stat_statements;'",
-    require   => [
-      Postgresql::Db['iris_development']
-    ],
-    unless    => ["psql -p${postgresql::port} iris_development -c '\\dx' | cut -d \\| -f1 | grep -w pg_stat_statements"]
-  }
-
   exec { 'overcommit install iris':
     provider  => 'shell',
     command   => "${bundle} exec overcommit --install --force && rm .git/hooks/post-checkout .git/hooks/commit-msg'",
