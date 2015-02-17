@@ -86,6 +86,8 @@ node default {
     'alias.rbm':    value => '!git fetch origin master && git rebase origin/master';
     'alias.gpc':    value => 'push --set-upstream origin $(git-branch-current 2> /dev/null)';
     'alias.unstage':    value => 'reset HEAD';
+    'alias.recent-commits': value => '"!recent_commits() { git log --pretty=format:\"%ad -- %an -- %d -- %B\" --date=relative --branches --since=7.days.ago --author=\"$1\"; }; recent_commits"';
+    'alias.old-branches': value => '"!old_branches() { for branch in `git branch -r | grep -v HEAD`; do echo -e `git show --format=\"%ci %cr\" $branch | head -n 1` \\t$branch; done | sort -r; }; old_branches;"';
     'push.default.':    value => 'current';
     'difftool.prompt':    value => 'false';
     'grep.linenumber':    value => 'true';
@@ -278,5 +280,10 @@ node default {
       name    => 'ClipMenu',
       path    => '/Applications/ClipMenu.app',
       hidden  => true;
+  }
+
+  boxen::env_script {
+    'dabo_eng':
+      source => "puppet:///${boxen::config::home}/repo/manifests/files/dabo_eng.sh",
   }
 }
