@@ -69,6 +69,7 @@ node default {
     'alias.st':    value => 'status';
     'alias.aa':    value => 'add --all';
     'alias.ci':    value => 'commit';
+    'alias.rcm':   value => 'commit -c HEAD --reset-author';
     'alias.br':    value => 'branch';
     'alias.co':    value => 'checkout';
     'alias.df':    value => 'diff';
