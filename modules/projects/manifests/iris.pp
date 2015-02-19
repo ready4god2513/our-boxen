@@ -18,6 +18,12 @@ class projects::iris {
       replace => 'no'
   }
 
+  boxen::env_script { 'redis_provider':
+    ensure   => $ensure,
+    content  => template('projects/iris/redis_provider.sh.erb'),
+    priority => 'lowest',
+  }
+
 
   ## rbenv-installed gems cannot be run in the boxen installation environment
   ## which uses the system ruby. The environment must be cleared (env -i)
