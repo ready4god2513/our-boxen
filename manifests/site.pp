@@ -97,11 +97,6 @@ node default {
     replace => 'yes'
   }
 
-  file { "${boxen::config::home}/bin/loopy":
-    source => "puppet:///${boxen::config::home}/repo/manifests/files/loopy",
-    replace => 'yes'
-  }
-
   exec { "Eliminate untrustworthy CNNIC CA":
     command => "/usr/bin/security delete-certificate -Z 8BAF4C9B1DF02A92F7DA128EB91BACF498604B6F /System/Library/Keychains/SystemRootCertificates.keychain",
     onlyif  => "/usr/bin/security find-certificate -c CNNIC /System/Library/Keychains/SystemRootCertificates.keychain",
@@ -283,10 +278,5 @@ node default {
       name    => 'ClipMenu',
       path    => '/Applications/ClipMenu.app',
       hidden  => true;
-  }
-
-  boxen::env_script {
-    'dabo_eng':
-      source => "puppet:///${boxen::config::home}/repo/manifests/files/dabo_eng.sh",
   }
 }

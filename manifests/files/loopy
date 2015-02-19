@@ -1,8 +1,0 @@
-CMD=$@
-for i in {1..10}; do
-  echo -e '\xF0\x9F\x8D\x94  '$CMD
-  echo "$CMD" | sh
-  if [ $? -ne 0 ]; then
-    break
-  fi
-done
