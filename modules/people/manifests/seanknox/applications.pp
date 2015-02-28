@@ -5,7 +5,6 @@ class people::seanknox::applications {
   include virtualbox
   include tmux
   include iterm2::stable
-  include dropbox
   include kindle
   include gitx::dev
   include python
