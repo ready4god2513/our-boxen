@@ -4,11 +4,13 @@ class projects::iris {
   require postgresql
 
   $dabo_ruby_version = '2.2.0'
+  $dabo_node_version = 'v0.12.0'
 
   boxen::project { 'iris':
     postgresql    => true,
     ruby          => $dabo_ruby_version,
     nginx         => true,
+    nodejs        => $dabo_node_version,
     source        => 'dabohealth/iris'
   }
 
@@ -30,7 +32,8 @@ class projects::iris {
   ## so an installed ruby (and gems) can be used in a new shell.
   ## env -i also clears out SHELL, so it must be defined when running commands.
 
-  $bundle = "env -i SHELL=/bin/bash /bin/bash -c 'source /opt/boxen/env.sh && RBENV_VERSION=${dabo_ruby_version} bundle"
+  $base_environment = "env -i SHELL=/bin/bash /bin/bash -c 'source /opt/boxen/env.sh &&"
+  $bundle = "$base_environment RBENV_VERSION=${dabo_ruby_version} bundle"
 
   ## NOTE: don't forget the trailing single quote in the command!
   ## e.g.
@@ -65,7 +68,15 @@ class projects::iris {
     command   => "${bundle} exec overcommit --install --force && rm .git/hooks/post-checkout .git/hooks/commit-msg'",
     cwd       => "${boxen::config::srcdir}/iris",
     require   => [
-      Exec['bundle install iris']
+      Exec['bundle install iris'],
+      Exec['npm install']
     ]
+  }
+
+  exec { 'npm install':
+    provider => 'shell',
+    command  => "$base_environment npm install'",
+    cwd      => "${boxen::config::srcdir}/iris",
+    require  => Nodejs[$dabo_node_version]
   }
 }

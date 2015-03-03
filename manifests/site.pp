@@ -110,16 +110,7 @@ node default {
   }
 
   # node versions
-  nodejs::version { 'v0.10': }
-
-  $nodejs_modules = [
-    'jshint',
-    'jscs'
-  ]
-
-  nodejs::module { $nodejs_modules:
-    node_version => 'v0.10',
-  }
+  nodejs::version { 'v0.12.0': }
 
   # default ruby versions
   ruby::version { '1.9.3': }
