@@ -54,3 +54,7 @@ git_completion_script=~/git-completion.bash
 test -s $git_completion_script && source $git_completion_script
 
 alias ls='ls -Gh'
+
+# what ever your current directory under the repo is,
+# cdd will bring you to the repo root
+alias cdd='cd $(git rev-parse --show-cdup)'
