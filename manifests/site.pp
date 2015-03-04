@@ -272,9 +272,4 @@ node default {
       path    => '/Applications/ClipMenu.app',
       hidden  => true;
   }
-
-  boxen::env_script {
-    'dabo_eng':
-      source => "puppet:///${boxen::config::home}/repo/manifests/files/dabo_eng.sh",
-  }
 }
