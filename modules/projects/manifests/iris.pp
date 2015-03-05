@@ -7,6 +7,7 @@ class projects::iris {
   $dabo_node_version = 'v0.12.0'
 
   boxen::project { 'iris':
+    redis         => true,
     postgresql    => true,
     ruby          => $dabo_ruby_version,
     nginx         => true,
