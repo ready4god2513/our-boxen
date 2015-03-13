@@ -7,6 +7,11 @@ class people::daboeng::pairing_station {
     replace => 'yes'
   }
 
+  file { "/Users/${::boxen_user}/.pryrc":
+    content => template('people/daboeng/pairing_shell/.pryrc.erb'),
+    replace => 'yes'
+  }
+
   file { "/Users/${::boxen_user}/git-completion.bash":
     content => template('people/daboeng/pairing_shell/git-completion.bash.erb'),
     replace => 'yes'
