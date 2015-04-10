@@ -10,11 +10,11 @@
 #     source: sstephenson/ruby-build
 
 
-ruby::build::ensure: 'v20141225'
+ruby::build::ensure: 'v20150303'
 ruby::version::alias:
   2.0.0: 2.0.0-p594
 
-ruby::global::version: '2.2.0'
+ruby::global::version: '2.2.1'
 
 ruby::version::env:
   Darwin:

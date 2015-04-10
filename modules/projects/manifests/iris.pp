@@ -3,7 +3,7 @@ class projects::iris {
 
   require postgresql
 
-  $dabo_ruby_version = '2.2.0'
+  $dabo_ruby_version = '2.2.1'
   $dabo_node_version = 'v0.12.0'
 
   boxen::project { 'iris':
@@ -12,7 +12,7 @@ class projects::iris {
     ruby          => $dabo_ruby_version,
     nginx         => true,
     nodejs        => $dabo_node_version,
-    source        => 'dabohealth/iris'
+    source        => 'seanknox/iris'
   }
 
   file { "${boxen::config::srcdir}/iris/.env":
