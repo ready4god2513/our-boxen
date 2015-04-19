@@ -99,18 +99,6 @@ node default {
     replace => 'yes'
   }
 
-  exec { "Eliminate untrustworthy CNNIC CA":
-    command => "/usr/bin/security delete-certificate -Z 8BAF4C9B1DF02A92F7DA128EB91BACF498604B6F /System/Library/Keychains/SystemRootCertificates.keychain",
-    onlyif  => "/usr/bin/security find-certificate -c CNNIC /System/Library/Keychains/SystemRootCertificates.keychain",
-    user    => root
-  }
-
-  exec { "Eliminate untrustworthy China Internet Network Information Center CA":
-    command => "/usr/bin/security delete-certificate -Z 4F99AA93FB2BD13726A1994ACE7FF005F2935D1E /System/Library/Keychains/SystemRootCertificates.keychain",
-    onlyif  => "/usr/bin/security find-certificate -c 'China Internet Network Information Center EV' /System/Library/Keychains/SystemRootCertificates.keychain",
-    user    => root
-  }
-
   # node versions
   nodejs::version { 'v0.12.0': }
 
@@ -132,13 +120,38 @@ node default {
     ruby_version => '*',
   }
 
+  ruby_gem { 'zeus':
+    gem          => 'zeus',
+    version      => '~> 0.15.0',
+    ruby_version => '*',
+  }
+
+  ruby_gem { 'pry':
+    gem          => 'pry',
+    version      => '~> 0.10.1',
+    ruby_version => '*',
+  }
+
+  ruby_gem { 'pry-coolline':
+    gem          => 'pry-coolline',
+    version      => '~> 0.2.4',
+    ruby_version => '*',
+  }
+
+  ruby_gem { 'awesome_print':
+    gem          => 'awesome_print',
+    version      => '~> 1.6.1',
+    ruby_version => '*',
+  }
+
   # common, useful packages
   package {
     [
       'ack',
       'findutils',
       'gnu-tar',
-      'the_silver_searcher'
+      'the_silver_searcher',
+      'tig'
     ]:
   }
 
@@ -159,35 +172,37 @@ node default {
   }
 
   # COMMON APPS
-  include chrome
-  include iterm2::stable
-  include virtualbox
-  include tmux
-  include flowdock
-  include googledrive
-  include dash
-  include alfred
+  include brewcask
   include sourcetree
-  include clipmenu
   include heroku
-  include spectacle
+  include virtualbox
+  package { 'slack': provider => 'brewcask' }
+  package { 'google-chrome': provider => 'brewcask' }
+  package { 'dropbox': provider => 'brewcask' }
+  package { 'alfred': provider => 'brewcask' }
+  package { 'spectacle': provider => 'brewcask' }
+  package { 'clipmenu': provider => 'brewcask' }
+  package { 'dash': provider => 'brewcask' }
+  package { 'google-drive': provider => 'brewcask' }
+  package { 'iterm2': provider => 'brewcask' }
+  package { 'skitch': provider => 'brewcask' }
+  package { 'tmux': }
 
   file { "/Users/${::boxen_user}/Library/Preferences/com.divisiblebyzero.Spectacle.plist":
     source => "puppet:///${boxen::config::home}/repo/manifests/files/com.divisiblebyzero.Spectacle.plist",
     replace => 'yes',
-    require => Class['spectacle']
+    require => Package['spectacle']
   }
 
   file { "/Users/${::boxen_user}/Library/Preferences/com.naotaka.ClipMenu.plist":
     source => "puppet:///${boxen::config::home}/repo/manifests/files/com.naotaka.ClipMenu.plist",
     replace => 'yes',
-    require => Class['clipmenu']
+    require => Package['clipmenu']
   }
 
   # OS X CONFIG
-  osx::recovery_message { "If this Mac is found, please email: phu@dabohealth.com": }
   # Download and enable software updates
-  include osx::software_update
+  # include osx::software_update
 
   ## Common OSX default configurations
   include osx::global::expand_print_dialog ## expand the print dialog by default
@@ -195,9 +210,14 @@ node default {
   include osx::global::enable_keyboard_control_access ## enables the keyboard for navigating controls in dialogs
   include osx::global::disable_key_press_and_hold
   include osx::global::enable_keyboard_control_access ## Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-
-  ## Finder
+  include osx::global::tap_to_click ## enables tap to click
+  include osx::dock::autohide ## automatically hide the dock
+  include osx::finder::show_all_on_desktop
+  include osx::no_network_dsstores ## disable creation of .DS_Store files on network shares
+  include osx::disable_app_quarantine ## disable the downloaded app quarantine
+  include osx::finder::show_hidden_files
   include osx::finder::unhide_library
+  include osx::keyboard::capslock_to_control
 
   boxen::osx_defaults { 'Use Column view in all Finder windows by default':
     key    => 'FXPreferredViewStyle',
@@ -218,14 +238,15 @@ node default {
     rate => 2
   }
 
-  ## Misc
-  include osx::no_network_dsstores ## disable creation of .DS_Store files on network shares
-  include osx::disable_app_quarantine ## disable the downloaded app quarantine
+  class { 'osx::global::key_repeat_delay':
+    delay => 1
+  }
+
 
   boxen::osx_defaults { 'Change software update check frequency to daily':
     key    => 'ScheduleFrequency',
     domain => 'com.apple.SoftwareUpdate',
-    value  => '1',
+    value  => '7',
     user   => $::boxen_user
   }
   boxen::osx_defaults { 'Prevent Time Machine from prompting to use new hard drives as backup volume':
@@ -251,26 +272,5 @@ node default {
     domain => 'com.apple.BezelServices',
     value  => '300',
     user   => $::boxen_user
-  }
-
-  osx_login_item {
-    'Google Drive':
-      name    => 'Google Drive',
-      path    => '/Applications/Google Drive.app',
-      hidden  => true;
-  }
-
-  osx_login_item {
-    'spectacle':
-      name    => 'spectacle',
-      path    => '/Applications/Spectacle.app',
-      hidden  => true;
-  }
-
-  osx_login_item {
-    'ClipMenu':
-      name    => 'ClipMenu',
-      path    => '/Applications/ClipMenu.app',
-      hidden  => true;
   }
 }
