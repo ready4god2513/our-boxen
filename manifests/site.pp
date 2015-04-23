@@ -155,7 +155,7 @@ node default {
     ]:
   }
 
-  file { "${boxen::config::srcdir}/dabo-boxen":
+  file { "${boxen::config::srcdir}/our-boxen":
     ensure => link,
     target => $boxen::config::repodir
   }
