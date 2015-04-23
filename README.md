@@ -1,6 +1,6 @@
-# Dabo's Boxen
+# Ryan's Boxen
 
-This is Dabo's incarnation of [GitHub's Boxen](https://boxen.github.com).
+This is Ryan's incarnation of [GitHub's Boxen](https://boxen.github.com).
 Automated Mac provisioning. Use Boxen to setup a robust developer
 environment on your Mac in an hour or less (or your money back).
 
@@ -50,27 +50,26 @@ To give you a brief overview, we're going to:
 
 * Install dependencies
 * Bootstrap your box to use dabo-boxen
-* Setup your system with all the tools and software you need to run [mayo_act](https://github.com/dabohealth/mayo_act)
 
 ## Boxenify me
 
 Install Boxen by either:
 
-* Use the web-based [Dabo Boxen Web](https://dabo-boxen-web.herokuapp.com) *(easiest)*, or
+* Use the web-based [Ryan Boxen Web](https://ryan-boxen-web.herokuapp.com) *(easiest)*, or
 * Alternatively, open Terminal.app and do the following:
 
 ```bash
 sudo mkdir -p /opt/boxen
 sudo chown ${USER}:staff /opt/boxen
-git clone https://github.com/dabohealth/dabo-boxen.git /opt/boxen/repo
+git clone https://github.com/ryanswood/our-boxen.git /opt/boxen/repo
 cd /opt/boxen/repo
 script/boxen all
 ```
 
 Boxen will run for awhile, depending on the speed of your computer. After it
 finishes, your provisioning is now complete. Open a new terminal window to
-reinitialize your shell and start using your system. The `mayo_act` project will
-also be cloned and setup in `~/src/mayo_act`. Yippee!
+reinitialize your shell and start using your system. The `insert_project name` project will
+also be cloned and setup in `~/src/project_name`. Yippee!
 
 ## What You Get
 
