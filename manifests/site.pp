@@ -271,4 +271,18 @@ node default {
     value  => '300',
     user   => $::boxen_user
   }
+
+  osx_login_item {
+    'spectacle':
+      name    => 'spectacle',
+      path    => '/Applications/Spectacle.app',
+      hidden  => true;
+  }
+
+  osx_login_item {
+    'ClipMenu':
+      name    => 'ClipMenu',
+      path    => '/Applications/ClipMenu.app',
+      hidden  => true;
+  }
 }
