@@ -1,14 +1,7 @@
-class people::seanknox::applications {
-  include kindle
-  include mysql
+class people::ryanswood::applications {
   include flux
-  include transmission
-  include zsh
   include openssl
   include cmake
-  include protobuf
-  include wget
-  include rdio
 
   package  {  [
       'htop-osx',
@@ -19,6 +12,5 @@ class people::seanknox::applications {
       ]:
         ensure => latest,
   }
-  mysql::db { 'mydb': }
 }
 

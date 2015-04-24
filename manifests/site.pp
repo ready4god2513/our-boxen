@@ -185,7 +185,6 @@ node default {
   package { 'dash': provider => 'brewcask' }
   package { 'google-drive': provider => 'brewcask' }
   package { 'iterm2': provider => 'brewcask' }
-  package { 'skitch': provider => 'brewcask' }
   package { 'tmux': }
 
   file { "/Users/${::boxen_user}/Library/Preferences/com.divisiblebyzero.Spectacle.plist":
@@ -241,7 +240,6 @@ node default {
   class { 'osx::global::key_repeat_delay':
     delay => 1
   }
-
 
   boxen::osx_defaults { 'Change software update check frequency to daily':
     key    => 'ScheduleFrequency',
