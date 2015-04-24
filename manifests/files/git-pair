@@ -192,7 +192,7 @@ Current email: $current_user_email"
   all_initials=`join " " "${sorted_initials[@]}"`
 
   # Create email
-  email="pair+$all_usernames@${ORG_DOMAIN:-dabohealth.com}"
+  email="pair+$all_usernames@${ORG_DOMAIN:-statenwood.com}"
 
   # Set git author
   git config --global user.name  "$all_names"
