@@ -232,15 +232,6 @@ node default {
     user   => $::boxen_user
   }
 
-  # Keyboard
-  class { 'osx::global::key_repeat_rate':
-    rate => 2
-  }
-
-  class { 'osx::global::key_repeat_delay':
-    delay => 1
-  }
-
   boxen::osx_defaults { 'Change software update check frequency to daily':
     key    => 'ScheduleFrequency',
     domain => 'com.apple.SoftwareUpdate',
