@@ -266,14 +266,14 @@ node default {
   osx_login_item {
     'spectacle':
       name    => 'spectacle',
-      path    => '/Applications/Spectacle.app',
+      path    => '/opt/homebrew-cask/Caskroom/spectacle/0.8.10/Spectacle.app',
       hidden  => true;
   }
 
   osx_login_item {
     'ClipMenu':
       name    => 'ClipMenu',
-      path    => '/Applications/ClipMenu.app',
+      path    => '/opt/homebrew-cask/Caskroom/clipmenu/0.4.3/ClipMenu.app',
       hidden  => true;
   }
 }
